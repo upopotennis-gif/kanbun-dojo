@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="漢文の重要句形・重要語句・訓読のきまり・背景知識を引ける辞典。暗記カード・四択テスト・復習の予定つき。共通テスト対応。">
 <meta name="theme-color" content="#27466F">
-<title>渡邊梢太の漢文道場</title>
+<title>漢文道場</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
@@ -382,17 +382,51 @@ nav.sister a{font-size:12.5px;padding:6px 14px;border-radius:999px;border:1px so
   color:var(--ink-2);text-decoration:none;background:var(--surface)}
 nav.sister a[aria-current]{background:var(--ai);border-color:var(--ai);color:var(--paper);font-weight:700}
 @media print{nav.sister{display:none}}
+/* ==== 漢文道場の装い: 墨と朱印、漢籍の界線（辞典の配色を上書き） ==== */
+:root{
+  --paper:#EEEDE8; --surface:#FBFBF9; --surface-2:#E4E2DA;
+  --ink:#1F2226; --ink-2:#4E5157; --ink-3:#7C7E82;
+  --rule:#D3D0C6; --rule-2:#BDB9AE;
+  --ai:#2E3440; --ai-soft:#E1E2E4;
+  --shu:#C0392B; --shu-soft:#F5E0DC;
+  --kaisen:#DCD9CF;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#141518; --surface:#1C1D21; --surface-2:#26272C;
+    --ink:#E8E6E1; --ink-2:#B9B7B1; --ink-3:#86857F;
+    --rule:#2F3035; --rule-2:#3E3F45;
+    --ai:#D8D3C7; --ai-soft:#2A2B30;
+    --shu:#E0654F; --shu-soft:#3A201B;
+    --kaisen:#1E1F23;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141518; --surface:#1C1D21; --surface-2:#26272C;
+  --ink:#E8E6E1; --ink-2:#B9B7B1; --ink-3:#86857F;
+  --rule:#2F3035; --rule-2:#3E3F45;
+  --ai:#D8D3C7; --ai-soft:#2A2B30;
+  --shu:#E0654F; --shu-soft:#3A201B;
+  --kaisen:#1E1F23;
+}
+body{background-image:linear-gradient(90deg,var(--kaisen) 1px,transparent 1px);background-size:34px 100%}
+.masthead{border-bottom:3px double var(--ink)}
+.brand h1{font-family:"Yuji Syuku",var(--serif);font-weight:400;letter-spacing:.08em}
+.brand h1::after{content:"漢";display:inline-block;margin-left:.35em;padding:0 .12em;font-size:.5em;line-height:1.35;
+  vertical-align:.45em;color:var(--paper);background:var(--shu);border-radius:3px;letter-spacing:0}
+
 @media (max-width:560px){
   .ex-l{grid-template-columns:4.4em 1fr}
   .ex-l:first-child{font-size:15px}
 }
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap">
 </head>
 <body>
 <div class="wrap">
   <header class="masthead">
     <div class="brand">
-      <h1>渡邊梢太の　漢文辞典</h1>
+      <h1>漢文辞典</h1>
       <p>句形・語句・訓読・背景知識を引く</p>
     </div>
     <div class="mast-right">

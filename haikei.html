@@ -4,63 +4,72 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="諸子百家・中国史・漢詩のきまり・故事成語の出典を読み物としてまとめたページ。漢文を読む前提になる知識を、順番に押さえられる。">
-<title>渡邊梢太の漢文 背景知識</title>
+<title>漢文 背景知識</title>
 <style>
   :root{
-    --ai:#2c3e66;
-    --ai-deep:#1d2c4d;
-    --yamabuki:#c98a1c;
-    --yamabuki-deep:#a06d13;
+    --ai:#2e3440;
+    --ai-deep:#1c2027;
+    --yamabuki:#b3924f;
+    --yamabuki-deep:#86692f;
     --wakatake:#3f8a63;
     --wakatake-bg:#e6f0e8;
     --kobai:#b8483f;
     --kobai-bg:#f6e6e2;
-    --bg:#f4efe1;
-    --surface:#fffdf8;
-    --surface-2:#eae1c9;
-    --ink:#2a251c;
-    --ink-soft:#6d6553;
-    --line:#d9cca7;
-    --shadow:rgba(42,37,28,0.14);
-    --focus:#8a5a1f;
+    --bg:#eeede8;
+    --surface:#fbfbf9;
+    --surface-2:#e4e2da;
+    --ink:#1f2226;
+    --ink-soft:#5e6166;
+    --line:#cfccc2;
+    --shadow:rgba(31,34,38,0.12);
+    --focus:#86692f;
+    --shu:#c0392b;
+    --shu-ink:#fff8f2;
+    --kaisen:#dcd9cf;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --ai:#8fa3d6;
-      --ai-deep:#c2cfec;
-      --yamabuki:#e0ac47;
-      --yamabuki-deep:#f0c877;
+      --ai:#d8d3c7;
+      --ai-deep:#f0ece2;
+      --yamabuki:#d1b06a;
+      --yamabuki-deep:#e6cd95;
       --wakatake:#7fc39e;
       --wakatake-bg:#1c3329;
       --kobai:#e2938c;
       --kobai-bg:#3a2320;
-      --bg:#141726;
-      --surface:#1c2038;
-      --surface-2:#262b4a;
-      --ink:#ece5d3;
-      --ink-soft:#a9a08b;
-      --line:#38406a;
+      --bg:#141518;
+      --surface:#1c1d21;
+      --surface-2:#26272c;
+      --ink:#e8e6e1;
+      --ink-soft:#a3a19b;
+      --line:#37383e;
       --shadow:rgba(0,0,0,0.45);
-      --focus:#e0ac47;
+      --focus:#d1b06a;
+      --shu:#e0654f;
+      --shu-ink:#1a0b08;
+      --kaisen:#212226;
     }
   }
   :root[data-theme="dark"]{
-    --ai:#8fa3d6;
-    --ai-deep:#c2cfec;
-    --yamabuki:#e0ac47;
-    --yamabuki-deep:#f0c877;
+    --ai:#d8d3c7;
+    --ai-deep:#f0ece2;
+    --yamabuki:#d1b06a;
+    --yamabuki-deep:#e6cd95;
     --wakatake:#7fc39e;
     --wakatake-bg:#1c3329;
     --kobai:#e2938c;
     --kobai-bg:#3a2320;
-    --bg:#141726;
-    --surface:#1c2038;
-    --surface-2:#262b4a;
-    --ink:#ece5d3;
-    --ink-soft:#a9a08b;
-    --line:#38406a;
+    --bg:#141518;
+    --surface:#1c1d21;
+    --surface-2:#26272c;
+    --ink:#e8e6e1;
+    --ink-soft:#a3a19b;
+    --line:#37383e;
     --shadow:rgba(0,0,0,0.45);
-    --focus:#e0ac47;
+    --focus:#d1b06a;
+    --shu:#e0654f;
+    --shu-ink:#1a0b08;
+    --kaisen:#212226;
   }
 
   *{ box-sizing:border-box; }
@@ -479,6 +488,42 @@ nav.sister a{ font-size:.82rem; padding:6px 14px; border-radius:999px; border:1p
 nav.sister a:hover{ border-color:var(--ai); color:var(--ai); }
 nav.sister a[aria-current]{ background:var(--ai); border-color:var(--ai); color:var(--surface); font-weight:700; }
 
+/* ==== 漢文道場の装い: 墨と朱印、漢籍の界線 ==== */
+.stage::before,
+:root:not([data-theme="light"]) .stage::before,
+:root[data-theme="dark"] .stage::before{
+  background-image:linear-gradient(90deg, var(--kaisen) 1px, transparent 1px);
+  background-size:34px 100%;
+  opacity:1; mix-blend-mode:normal;
+}
+.rod{ gap:10px; }
+.rod::before,.rod::after{
+  height:7px; border-radius:0; background:transparent;
+  border-top:3px solid var(--ai); border-bottom:1px solid var(--ai);
+}
+.rod .knob{
+  width:13px; height:13px; border-radius:2px;
+  background:var(--shu); box-shadow:inset 0 0 0 2px var(--shu), inset 0 0 0 3px var(--shu-ink);
+}
+.rod .knob + .knob{ display:none; }
+header.masthead h1{ font-family:'Yuji Syuku','Shippori Mincho',serif; font-weight:400; letter-spacing:.08em; }
+.card{ border-radius:3px; }
+.chip, .choice, button.btn{ border-radius:4px; }
+.choice .badge{ border-radius:3px; }
+.btn-primary,
+:root:not([data-theme="light"]) .btn-primary,
+:root[data-theme="dark"] .btn-primary{
+  background:var(--ai); color:var(--surface); box-shadow:0 3px 0 var(--ai-deep);
+}
+.dots span.current{ background:var(--shu); }
+.stamp{
+  border-radius:6px; transform:rotate(-3deg);
+  background:var(--shu); color:var(--shu-ink); border:none;
+  box-shadow:inset 0 0 0 4px var(--shu), inset 0 0 0 6px var(--shu-ink), 0 3px 10px var(--shadow);
+}
+.unit-group h3{ border-bottom-style:double; border-bottom-width:3px; }
+.cal span.today{ outline-color:var(--shu); }
+
 
 .wraph{max-width:820px;margin:0 auto;padding:28px 20px 64px}
 .toc{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:0 0 30px}
@@ -515,13 +560,13 @@ nav.sister a[aria-current]{background:var(--ai);border-color:var(--ai);color:var
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Maru+Gothic:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Yuji+Syuku&family=Zen+Maru+Gothic:wght@400;500;700&display=swap">
 </head>
 <body>
 <div class="stage"><div class="wraph" id="top">
   <header class="masthead">
     <div class="rod"><span class="knob"></span><span class="knob"></span></div>
-    <h1><span style="display:inline-block">渡邊梢太の</span><span style="display:inline-block">漢文 背景知識</span></h1>
+    <h1>漢文 背景知識</h1>
     <p>漢文を読む前に知っておきたいことを、順番にまとめました。青い語を押すと辞典のその項目が開きます。</p>
     <div class="rod" style="margin-top:16px"><span class="knob"></span><span class="knob"></span></div>
   </header>
@@ -644,7 +689,7 @@ nav.sister a[aria-current]{background:var(--ai);border-color:var(--ai);color:var
 <h2>最後に確かめること</h2>
 <ul><li>主語が変わるところに印をつけたか</li><li>会話の始まり（曰）と終わり（と）を決めたか</li><li>句形を見つけて、訳の形を決めたか</li><li>筆者（または登場人物）の評価の向きをつかんだか</li></ul>
 <a class="backtop" href="#top">↑ 目次へ</a></section>
-  <footer style="text-align:center;font-size:.8rem;color:var(--ink-soft);margin-top:40px;line-height:1.9">渡邊梢太の漢文 背景知識 — 本文はすべて独自に作成しています。<br>引用した詩文は『論語』『孟子』『史記』『唐詩選』など、著作権の切れた古典によります。</footer>
+  <footer style="text-align:center;font-size:.8rem;color:var(--ink-soft);margin-top:40px;line-height:1.9">漢文 背景知識 — 本文はすべて独自に作成しています。<br>引用した詩文は『論語』『孟子』『史記』『唐詩選』など、著作権の切れた古典によります。</footer>
 </div></div>
 </body>
 </html>

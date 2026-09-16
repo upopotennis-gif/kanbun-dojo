@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="漢文の重要句形を単元ごとに10問ずつ解ける4択ドリル。再読文字・否定・疑問反語・使役受身・比較・限定・仮定まで。">
+<title>渡邊梢太の漢文句形道場</title>
+<style>
+  :root{
+    --ai:#2c3e66;
+    --ai-deep:#1d2c4d;
+    --yamabuki:#c98a1c;
+    --yamabuki-deep:#a06d13;
+    --wakatake:#3f8a63;
+    --wakatake-bg:#e6f0e8;
+    --kobai:#b8483f;
+    --kobai-bg:#f6e6e2;
+    --bg:#f4efe1;
+    --surface:#fffdf8;
+    --surface-2:#eae1c9;
+    --ink:#2a251c;
+    --ink-soft:#6d6553;
+    --line:#d9cca7;
+    --shadow:rgba(42,37,28,0.14);
+    --focus:#8a5a1f;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ai:#8fa3d6;
+      --ai-deep:#c2cfec;
+      --yamabuki:#e0ac47;
+      --yamabuki-deep:#f0c877;
+      --wakatake:#7fc39e;
+      --wakatake-bg:#1c3329;
+      --kobai:#e2938c;
+      --kobai-bg:#3a2320;
+      --bg:#141726;
+      --surface:#1c2038;
+      --surface-2:#262b4a;
+      --ink:#ece5d3;
+      --ink-soft:#a9a08b;
+      --line:#38406a;
+      --shadow:rgba(0,0,0,0.45);
+      --focus:#e0ac47;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ai:#8fa3d6;
+    --ai-deep:#c2cfec;
+    --yamabuki:#e0ac47;
+    --yamabuki-deep:#f0c877;
+    --wakatake:#7fc39e;
+    --wakatake-bg:#1c3329;
+    --kobai:#e2938c;
+    --kobai-bg:#3a2320;
+    --bg:#141726;
+    --surface:#1c2038;
+    --surface-2:#262b4a;
+    --ink:#ece5d3;
+    --ink-soft:#a9a08b;
+    --line:#38406a;
+    --shadow:rgba(0,0,0,0.45);
+    --focus:#e0ac47;
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Zen Maru Gothic','Hiragino Maru Gothic ProN',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .stage{
+    max-width:680px;
+    margin:0 auto;
+    padding:28px 18px 60px;
+    position:relative;
+  }
+  .stage::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image:radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+    background-size:16px 16px;
+    opacity:.22;
+    mix-blend-mode:multiply;
+    pointer-events:none;
+    z-index:0;
+  }
+  :root:not([data-theme="light"]) .stage::before{ mix-blend-mode:screen; opacity:.10; }
+  :root[data-theme="dark"] .stage::before{ mix-blend-mode:screen; opacity:.10; }
+
+  .stage > *{ position:relative; z-index:1; }
+
+  .rod{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:0 auto;
+  }
+  .rod::before,.rod::after{
+    content:'';
+    flex:1;
+    height:5px;
+    border-radius:3px;
+    background:var(--ai-deep);
+  }
+  .rod .knob{
+    width:14px; height:14px; border-radius:50%;
+    background:var(--yamabuki);
+    box-shadow:0 0 0 2px var(--surface);
+    flex:none;
+  }
+
+  header.masthead{ text-align:center; padding:6px 0 22px; }
+  header.masthead .rod{ margin-bottom:16px; }
+  h1{
+    font-family:'Shippori Mincho', serif;
+    font-weight:800;
+    font-size:clamp(1.6rem, 1.1rem + 3vw, 2.3rem);
+    letter-spacing:.03em;
+    margin:0 0 8px;
+    text-wrap:balance;
+  }
+  header.masthead p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:.92rem;
+    line-height:1.75;
+  }
+
+  section{ display:block; }
+  section[hidden]{ display:none !important; }
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:22px 20px;
+    box-shadow:0 3px 14px var(--shadow);
+  }
+  .card + .card{ margin-top:16px; }
+
+  .steps{
+    list-style:none;
+    margin:0 0 20px;
+    padding:0;
+    display:grid;
+    gap:8px;
+    font-size:.9rem;
+    color:var(--ink-soft);
+  }
+  .steps li{ display:flex; gap:10px; align-items:baseline; }
+  .steps .num{
+    font-family:'Shippori Mincho',serif;
+    color:var(--yamabuki-deep);
+    font-weight:700;
+    flex:none;
+    width:1.4em;
+  }
+
+  label.field-label{
+    display:block;
+    font-weight:700;
+    margin-bottom:4px;
+    font-size:.95rem;
+  }
+  .field-hint{
+    font-size:.8rem;
+    color:var(--ink-soft);
+    margin:0 0 10px;
+  }
+
+  .unit-group{ margin-bottom:18px; }
+  .unit-group:last-child{ margin-bottom:0; }
+  .unit-group h3{
+    font-family:'Shippori Mincho',serif;
+    font-size:.95rem;
+    font-weight:700;
+    color:var(--ai);
+    margin:0 0 8px;
+    padding-bottom:6px;
+    border-bottom:1px solid var(--line);
+  }
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .chip{
+    border:1.5px solid var(--line);
+    background:var(--bg);
+    color:var(--ink);
+    border-radius:999px;
+    padding:8px 14px;
+    font-size:.84rem;
+    line-height:1.4;
+    cursor:pointer;
+    font-family:'Zen Maru Gothic',sans-serif;
+    text-align:left;
+  }
+  .chip:hover{ border-color:var(--ai); }
+  .chip.active{ background:var(--ai); color:var(--surface); border-color:var(--ai); font-weight:700; }
+
+  .selected-unit-box{
+    margin-top:18px;
+    padding:12px 14px;
+    background:var(--surface-2);
+    border-radius:8px;
+    font-size:.88rem;
+  }
+  .selected-unit-box strong{
+    font-family:'Shippori Mincho',serif;
+    color:var(--ai);
+  }
+
+  textarea:focus-visible, button:focus-visible, .choice:focus-visible, .chip:focus-visible, input:focus-visible{
+    outline:3px solid var(--focus);
+    outline-offset:2px;
+  }
+
+  .actions{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:20px;
+  }
+  button.btn{
+    font-family:'Zen Maru Gothic',sans-serif;
+    font-weight:700;
+    font-size:1.02rem;
+    padding:15px 18px;
+    border-radius:10px;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .12s ease, filter .12s ease;
+  }
+  @media (prefers-reduced-motion: reduce){ button.btn{ transition:none; } }
+  button.btn:active{ transform:translateY(1px); }
+  button.btn:disabled{ opacity:.5; cursor:not-allowed; transform:none; }
+  .btn-primary{
+    background:var(--yamabuki);
+    color:#2a1c04;
+    box-shadow:0 3px 0 var(--yamabuki-deep);
+  }
+  :root:not([data-theme="light"]) .btn-primary{ color:#241a02; }
+  :root[data-theme="dark"] .btn-primary{ color:#241a02; }
+  .btn-primary:hover:not(:disabled){ filter:brightness(1.04); }
+  .btn-secondary{
+    background:transparent;
+    color:var(--ai);
+    border-color:var(--ai);
+  }
+  .btn-secondary:hover:not(:disabled){ background:var(--surface-2); }
+  .btn-ghost{
+    background:transparent;
+    color:var(--ink-soft);
+    border:none;
+    text-decoration:underline;
+    padding:8px;
+    font-size:.9rem;
+  }
+
+  #error-banner[hidden]{ display:none !important; }
+  #error-banner{
+    background:var(--kobai-bg);
+    border:1px solid var(--kobai);
+    color:var(--kobai);
+    border-radius:8px;
+    padding:12px 14px;
+    font-size:.88rem;
+    margin-bottom:14px;
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    align-items:flex-start;
+  }
+  #error-banner button{
+    background:none; border:none; color:inherit; font-weight:700; cursor:pointer; font-size:1rem; line-height:1;
+  }
+
+  .quiz-progress{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:6px;
+    font-family:'Shippori Mincho',serif;
+  }
+  .quiz-progress .count{ font-size:1.1rem; font-weight:700; font-variant-numeric:tabular-nums; }
+  .quiz-progress .score{ font-size:.85rem; color:var(--ink-soft); font-family:'Zen Maru Gothic',sans-serif; }
+  .quiz-unit{
+    font-size:.8rem;
+    color:var(--ink-soft);
+    margin:0 0 14px;
+  }
+  .passage-box{
+    background:var(--surface-2);
+    border-radius:8px;
+    padding:14px 16px;
+    margin:0 0 18px;
+  }
+  .passage-box .label{
+    font-weight:700;
+    color:var(--ai);
+    display:block;
+    margin-bottom:6px;
+    font-size:.78rem;
+    letter-spacing:.04em;
+  }
+  .passage-box p{
+    font-family:'Shippori Mincho',serif;
+    font-size:.98rem;
+    line-height:1.9;
+    margin:0;
+    white-space:pre-wrap;
+  }
+  .dots{ display:flex; gap:5px; margin-bottom:18px; flex-wrap:wrap; }
+  .dots span{ width:9px; height:9px; border-radius:50%; background:var(--line); }
+  .dots span.done-correct{ background:var(--wakatake); }
+  .dots span.done-wrong{ background:var(--kobai); }
+  .dots span.current{ background:var(--yamabuki); }
+
+  .question-text{
+    font-family:'Shippori Mincho',serif;
+    font-size:clamp(1.05rem, .9rem + 1vw, 1.3rem);
+    line-height:1.85;
+    margin:0 0 20px;
+    text-wrap:balance;
+  }
+
+  .choices{ display:grid; gap:10px; }
+  .choice{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-align:left;
+    width:100%;
+    background:var(--bg);
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:14px 16px;
+    font-family:'Zen Maru Gothic',sans-serif;
+    font-size:1rem;
+    line-height:1.6;
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .choice:hover:not(:disabled){ border-color:var(--ai); }
+  .choice .badge{
+    flex:none;
+    width:28px; height:28px;
+    border-radius:50%;
+    background:var(--surface-2);
+    color:var(--ink-soft);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:.85rem;
+    font-family:'Shippori Mincho',serif;
+  }
+  .choice:disabled{ cursor:default; }
+  .choice.correct{ background:var(--wakatake-bg); border-color:var(--wakatake); }
+  .choice.correct .badge{ background:var(--wakatake); color:#fff; }
+  .choice.incorrect{ background:var(--kobai-bg); border-color:var(--kobai); }
+  .choice.incorrect .badge{ background:var(--kobai); color:#fff; }
+
+  .feedback{
+    margin-top:18px;
+    padding-top:16px;
+    border-top:1px dashed var(--line);
+  }
+  .feedback .verdict{
+    font-family:'Shippori Mincho',serif;
+    font-weight:800;
+    font-size:1.15rem;
+    margin:0 0 10px;
+  }
+  .feedback .verdict.correct{ color:var(--wakatake); }
+  .feedback .verdict.incorrect{ color:var(--kobai); }
+  .feedback .explanation{ font-size:.95rem; line-height:1.8; margin:0 0 12px; }
+  .feedback .translation{
+    background:var(--surface-2);
+    border-radius:8px;
+    padding:12px 14px;
+    font-size:.9rem;
+    line-height:1.8;
+  }
+  .feedback .translation .label{
+    font-weight:700;
+    color:var(--ai);
+    display:block;
+    margin-bottom:4px;
+    font-size:.78rem;
+    letter-spacing:.04em;
+  }
+
+  .result-head{ text-align:center; padding:8px 0 22px; }
+  .stamp{
+    width:118px; height:118px;
+    margin:0 auto 16px;
+    border-radius:50%;
+    border:3px solid var(--kobai);
+    box-shadow:inset 0 0 0 3px var(--surface), 0 3px 10px var(--shadow);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    transform:rotate(-5deg);
+    color:var(--kobai);
+    font-family:'Shippori Mincho',serif;
+  }
+  .stamp .frac{ font-size:1.7rem; font-weight:800; line-height:1; font-variant-numeric:tabular-nums; }
+  .stamp .of{ font-size:.7rem; margin-top:2px; }
+  .result-message{ font-size:.98rem; line-height:1.8; color:var(--ink-soft); max-width:32em; margin:0 auto; }
+
+  .guide-content{
+    font-size:.98rem;
+    line-height:1.95;
+  }
+  .guide-content h1,.guide-content h2,.guide-content h3{
+    font-family:'Shippori Mincho',serif;
+    margin:1.2em 0 .5em;
+    line-height:1.5;
+  }
+  .guide-content h1{ font-size:1.25rem; }
+  .guide-content h2{ font-size:1.12rem; }
+  .guide-content h3{ font-size:1.02rem; }
+  .guide-content p{ margin:0 0 .9em; }
+  .guide-content ul,.guide-content ol{ margin:0 0 1em; padding-left:1.4em; }
+  .guide-content li{ margin-bottom:.4em; }
+  .guide-content strong{ color:var(--ai); }
+  .guide-content code{ background:var(--surface-2); padding:.1em .3em; border-radius:4px; }
+  .thinking{ color:var(--ink-soft); }
+
+  footer{
+    text-align:center;
+    font-size:.75rem;
+    color:var(--ink-soft);
+    margin-top:34px;
+    line-height:1.7;
+  }
+
+
+/* ==== 記録機能 追加分 ==== */
+.sub-actions{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+.stat-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:12px; margin-bottom:22px; }
+.stat-tile{ border:1px solid var(--line); border-radius:10px; padding:12px 14px; background:var(--bg); }
+.stat-tile .k{ display:block; font-size:.74rem; color:var(--ink-soft); letter-spacing:.06em; }
+.stat-tile .v{ display:block; font-size:1.5rem; font-weight:700; color:var(--ai); font-variant-numeric:tabular-nums; margin-top:2px; }
+.stat-tile .v small{ font-size:.8rem; font-weight:400; color:var(--ink-soft); margin-left:2px; }
+.stats-empty{ color:var(--ink-soft); padding:18px 0; }
+.stat-table{ width:100%; border-collapse:collapse; font-size:.9rem; }
+.stat-table th{ text-align:left; font-size:.72rem; letter-spacing:.08em; color:var(--ink-soft); border-bottom:1px solid var(--line); padding:6px 8px; font-weight:700; }
+.stat-table td{ border-bottom:1px solid var(--line); padding:8px; vertical-align:middle; }
+.stat-table td.num{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.rate-bar{ display:block; position:relative; height:8px; border-radius:4px; background:var(--line); min-width:70px; }
+.rate-bar i{ position:absolute; left:0; top:0; bottom:0; border-radius:4px; background:var(--wakatake); }
+.rate-bar i.low{ background:var(--kobai); }
+.rate-bar i.mid{ background:var(--yamabuki); }
+.cal{ display:grid; grid-template-columns:repeat(7,1fr); gap:4px; max-width:330px; }
+.cal span{ aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:.74rem;
+  border-radius:6px; color:var(--ink-soft); font-variant-numeric:tabular-nums; }
+.cal span.head{ color:var(--ink-soft); font-size:.68rem; aspect-ratio:auto; padding-bottom:2px; }
+.cal span.on{ background:var(--wakatake); color:#fff; font-weight:700; }
+.cal span.today{ outline:2px solid var(--yamabuki); outline-offset:-2px; }
+.stats-section-title{ font-size:.95rem; font-weight:700; margin:26px 0 10px; color:var(--ai); }
+.wrongbox-line{ display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:6px; }
+.privacy-note{ font-size:.76rem; color:var(--ink-soft); margin-top:26px; line-height:1.7; }
+
+/* ==== 狭い画面（スマホ）の調整 ==== */
+@media (max-width:400px){
+  h1{ font-size:1.5rem; letter-spacing:.01em; }
+  .stage{ padding:20px 14px 48px; }
+  .card{ padding:18px 15px; }
+  .chip{ font-size:.82rem; padding:8px 12px; }
+  .stat-grid{ grid-template-columns:repeat(2,1fr); }
+}
+#btn-next-question{ scroll-margin-bottom:24px; }
+
+/* ==== 道場の切り替え ==== */
+nav.sister{ display:flex; justify-content:center; gap:6px; flex-wrap:wrap; margin:0 0 18px; }
+nav.sister a{ font-size:.82rem; padding:6px 14px; border-radius:999px; border:1px solid var(--line);
+  color:var(--ink-soft); text-decoration:none; background:var(--surface); }
+nav.sister a:hover{ border-color:var(--ai); color:var(--ai); }
+nav.sister a[aria-current]{ background:var(--ai); border-color:var(--ai); color:var(--surface); font-weight:700; }
+
+
+/* ==== 単語道場・常識道場 追加分 ==== */
+nav.sister{ display:flex; justify-content:center; gap:6px; flex-wrap:wrap; margin:0 0 18px; }
+nav.sister a{ font-size:.82rem; padding:6px 14px; border-radius:999px; border:1px solid var(--line);
+  color:var(--ink-soft); text-decoration:none; background:var(--surface); }
+nav.sister a:hover{ border-color:var(--ai); color:var(--ai); }
+nav.sister a[aria-current]{ background:var(--ai); border-color:var(--ai); color:var(--surface); font-weight:700; }
+.q-prompt{ font-size:.84rem; color:var(--ink-soft); margin:0 0 8px; }
+.question-text .bosen, .translation .bosen{ text-decoration:underline; text-decoration-thickness:2px;
+  text-underline-offset:.3em; text-decoration-color:var(--yamabuki); font-weight:700; }
+.question-text.big{ font-size:clamp(1.6rem, 1.2rem + 2vw, 2.1rem); text-align:center; letter-spacing:.08em; }
+.q-source{ font-size:.8rem; color:var(--ink-soft); text-align:right; margin:-12px 0 18px; }
+.feedback .word-head{ font-family:'Shippori Mincho',serif; font-weight:700; color:var(--ai); margin:0 0 6px; }
+.feedback .explanation{ white-space:pre-line; }
+.feedback .meta-note{ font-size:.76rem; color:var(--ink-soft); margin:10px 0 0; }
+.range-box{ margin-top:18px; padding-top:16px; border-top:1px dashed var(--line); }
+.range-row{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.range-row input{ width:5.2em; font:inherit; font-size:1rem; padding:8px 10px; border-radius:8px;
+  border:1.5px solid var(--line); background:var(--bg); color:var(--ink); font-variant-numeric:tabular-nums; }
+.range-row .chip{ margin-left:4px; }
+.word-table{ width:100%; border-collapse:collapse; font-size:.9rem; line-height:1.6; }
+.word-table th{ text-align:left; font-size:.72rem; color:var(--ink-soft); border-bottom:1px solid var(--line); padding:6px; }
+.word-table td{ border-bottom:1px solid var(--line); padding:8px 6px; vertical-align:top; }
+.word-table td.no{ color:var(--ink-soft); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.word-table td.w{ font-family:'Shippori Mincho',serif; font-weight:700; width:8.5em; }
+.word-table td.w small{ display:block; font-weight:500; color:var(--ink-soft); font-size:.74rem; line-height:1.5; }
+.guide-content table{ border-collapse:collapse; font-size:.9rem; margin:0 0 1em; line-height:1.55; }
+.guide-content th, .guide-content td{ border:1px solid var(--line); padding:6px 8px; }
+.guide-content th{ background:var(--surface-2); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Maru+Gothic:wght@400;500;700&display=swap">
+</head>
+<body>
+
+<div class="stage">
+  <header class="masthead">
+    <div class="rod"><span class="knob"></span><span class="knob"></span></div>
+    <h1>渡邊梢太の漢文句形道場</h1>
+    <p>再読文字・否定・疑問反語・使役受身・比較・限定・仮定など、漢文の重要句形を単元ごとに10問ずつ確かめます。アカウント登録は不要です。</p>
+    <div class="rod" style="margin-top:16px"><span class="knob"></span><span class="knob"></span></div>
+  </header>
+
+  <nav class="sister" aria-label="道場の切り替え"><a href="./">漢文辞典</a><a href="kukei.html" aria-current="page">句形道場</a><a href="haikei.html">背景知識</a></nav>
+
+  <div id="error-banner" hidden>
+    <span id="error-text"></span>
+    <button type="button" id="error-close" aria-label="閉じる">×</button>
+  </div>
+
+  <main id="app">
+
+    <section id="view-setup">
+      <div class="card">
+        <ol class="steps">
+          <li><span class="num">一</span>単元を選ぶ（先に「学習ガイド」で要点を読むのがおすすめ）</li>
+          <li><span class="num">二</span>「クイズを始める」を押して4択に挑戦</li>
+        </ol>
+
+        <div id="unit-groups"></div>
+
+        
+
+        <div class="selected-unit-box" id="selected-unit-box" hidden>
+          選択中: <strong id="selected-unit-label"></strong>
+          <span id="selected-unit-count" style="color:var(--ink-soft)"></span>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="btn-make-quiz" disabled>クイズを始める</button>
+          <button type="button" class="btn btn-secondary" id="btn-view-guide" disabled>学習ガイドを見る</button>
+        </div>
+
+        <div class="sub-actions">
+          <button type="button" class="btn btn-secondary" id="btn-wrongbox">苦手ボックスから10問</button>
+          <button type="button" class="btn btn-ghost" id="btn-stats">これまでの記録</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-quiz" hidden>
+      <div class="card">
+        <div class="quiz-progress">
+          <span class="count" id="quiz-count">問 1 / 10</span>
+          <span class="score" id="quiz-score">正解 0</span>
+        </div>
+        <p class="quiz-unit" id="quiz-unit"></p>
+        <div class="dots" id="quiz-dots"></div>
+        <p class="q-prompt" id="quiz-prompt" hidden></p>
+        <p class="question-text" id="quiz-question"></p>
+        <p class="q-source" id="quiz-source" hidden></p>
+        <div class="choices" id="quiz-choices"></div>
+
+        <div class="feedback" id="quiz-feedback" hidden>
+          <p class="verdict" id="feedback-verdict"></p>
+          <p class="word-head" id="feedback-head" hidden></p>
+          <p class="explanation" id="feedback-explanation"></p>
+          <div class="translation" id="feedback-translation" hidden>
+            <span class="label">現代語訳</span>
+            <span id="feedback-translation-text"></span>
+          </div>
+          <p class="meta-note" id="feedback-meta" hidden></p>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="btn-next-question" hidden>次の問題へ</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-result" hidden>
+      <div class="card">
+        <div class="result-head">
+          <div class="stamp"><span class="frac" id="result-frac">0/10</span><span class="of">正解</span></div>
+          <p class="result-message" id="result-message"></p>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="btn-wrong-only" hidden>間違えた問題だけもう一度</button>
+          <button type="button" class="btn btn-secondary" id="btn-retry-quiz">同じ問題にもう一度挑戦</button>
+          <button type="button" class="btn btn-secondary" id="btn-new-quiz">違う10問に挑戦する</button>
+          <button type="button" class="btn btn-secondary" id="btn-guide-from-result">学習ガイドを見る</button>
+          <button type="button" class="btn btn-ghost" id="btn-change-unit">別の単元を選ぶ</button>
+          <button type="button" class="btn btn-ghost" id="btn-stats-from-result">記録を見る</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-stats" hidden>
+      <div class="card">
+        <h2 class="card-title">これまでの記録</h2>
+        <div id="stats-body"></div>
+        <p class="privacy-note">
+          記録はこの端末のブラウザの中だけに保存されます。先生や他の人に送られることはありません。
+          ブラウザの履歴やサイトデータを消すと記録も消えます。
+        </p>
+        <div class="actions" style="margin-top:18px">
+          <button type="button" class="btn btn-secondary" id="btn-stats-back">単元選択に戻る</button>
+          <button type="button" class="btn btn-ghost" id="btn-stats-reset">記録を消す</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-guide" hidden>
+      <div class="card">
+        <div class="guide-content" id="guide-content"></div>
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="btn-guide-quiz">この範囲でクイズを始める</button>
+          <button type="button" class="btn btn-secondary" id="btn-guide-back">単元選択に戻る</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>渡邊梢太の漢文句形道場 — 説明文・問題・解説はすべて独自に作成しています。<br>例文は『論語』『孟子』『史記』など、著作権の切れた古典から引いています。</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  var CONFIG = {"storeKey":"kanbunKukei.v1","unitWord":"単元","lowScoreMessage":"まずは学習ガイドで句形の形を確認してから、もう一度挑戦してみましょう。","maxNo":0};
+  var UNITS = [{"chapter":"まず押さえる","items":[{"id":"saidoku","label":"再読文字","hint":"未・将・且・当・応・宜・須・猶・盍の九字。副詞として読んでから、返ってもう一度読む"},{"id":"hitei","label":"否定・部分否定","hint":"不・無・非・未の使い分けと、二重否定・部分否定・全部否定の見分け方"},{"id":"gimon","label":"疑問・反語","hint":"何・安・豈・誰・孰などの疑問詞と、文末の結び方による疑問と反語の見分け"}]},{"chapter":"動作の向き","items":[{"id":"shieki","label":"使役・受身","hint":"使・令による使役と、見・被・為A所B・於による受身。「しむ」「る・らる」の見分け"},{"id":"hikaku","label":"比較・選択","hint":"A於B（〜より）、不如・莫如（〜に及ばない）、与其A寧B（〜よりむしろ）、孰与（どちらが）"},{"id":"gentei","label":"限定・累加・抑揚","hint":"唯〜のみ、非唯A亦B、且A況B乎。範囲を限る形と、重ねる形、軽いものから重いものへ進む形"}]},{"chapter":"条件と気持ち","items":[{"id":"katei","label":"仮定・逆接","hint":"若・如・苟（もし）、縦（たとひ）、雖（といへども）、則（すなはち）の使い分け"},{"id":"ganbou","label":"願望・感嘆","hint":"願・請（どうか〜）、欲（〜したい）と、嗚呼・何其〜也・豈不〜哉の詠嘆"}]},{"chapter":"読むための土台","items":[{"id":"okiji","label":"置き字・重要助字","hint":"而・於・矣・焉・也・者・所・之・以・与。読まない字と、読んで意味を担う字"},{"id":"kundoku","label":"訓読・書き下し","hint":"返り点の付け方と読む順、送り仮名、書き下し文のきまり"}]}];
+  var POOL = [{"g":"saidoku","q":"「未」の再読文字としての読みとして正しいものはどれか。","c":["いまだ〜べし","いまだ〜ず","まさに〜んとす","なほ〜ごとし"],"a":1,"e":"「未」は「いまダ〜ず」と読み、「まだ〜しない」の意。二度目は打消の「ず」で読むので、書き下し文では「未だ〜ず」となる。"},{"g":"saidoku","q":"「将渡江」の書き下し文として正しいものはどれか。","c":["将に江を渡らんとす","将た江を渡る","将に江を渡るべし","将く江を渡らん"],"a":0,"e":"「将」は「まさニ〜ントす」と読む再読文字で、「今にも〜しようとする」の意。二度目の「んとす」はひらがなで書く。"},{"g":"saidoku","q":"「当」と「応」の違いの説明として最も適当なものはどれか。","c":["当は推量、応は義務を表す","どちらも禁止を表す","当は当然・義務、応は推量を表す","当は過去、応は未来を表す"],"a":2,"e":"どちらも「まさニ〜ベシ」と読むが、当は「当然そうすべきだ」という義務・当然、応は「きっとそうだろう」という推量に重きがある。"},{"g":"saidoku","q":"《宜》従衆議。の傍線部の読みとして正しいものはどれか。","c":["よろしく","すべからく","まさに","なほ"],"a":0,"e":"「宜」は「よろシク〜ベシ」と読み、「〜するのがよい」と適当・勧告を表す。書き下すと「宜しく衆議に従ふべし」。"},{"g":"saidoku","q":"「須及時勉励」の意味として最も適当なものはどれか。","c":["時が来るのを待つのがよい","ぜひ今のうちに努力すべきだ","きっと時に間に合うだろう","まだ努力を始めていない"],"a":1,"e":"「須」は「すべかラク〜ベシ」と読み、必要・当為を表す。「須らく時に及びて勉励すべし」で、ぜひ今のうちに努力せよ、の意。"},{"g":"saidoku","q":"「過猶不及」の書き下し文として正しいものはどれか。","c":["過ぎたるは猶ほ及ばざるなり","過ぎたるは猶ほ及ばざるがごとし","過ぎたるは猶ほ及ばざるのごとし","過ちて猶ほ及ばず"],"a":1,"e":"「猶」は「なホ〜ノ／ガごとシ」と読む再読文字。下が「及ばざる」という用言なので「ガごとシ」を添える。体言のときは「ノごとシ」。（論語・先進）"},{"g":"saidoku","q":"「盍各言爾志」の傍線部「盍」の意味として最も適当なものはどれか。","c":["どうして〜しないのか","決して〜してはならない","まだ〜しない","たぶん〜だろう"],"a":0,"e":"「盍」は「なんゾ〜ざル」と読み、「何不」がまとまった字。「〜すればよいのに」という勧めをこめた反語になる。（論語・公冶長）"},{"g":"saidoku","q":"「且」を再読文字として読むときの読みはどれか。","c":["かつ","まさに〜んとす","まさに〜んとほつす","すなはち"],"a":1,"e":"「且」は再読文字なら「まさニ〜ントす」で「将」と同じ。副詞として読むときは「かツ（その上・〜しながら）」で、抑揚の「且つ〜況んや」もこちら。"},{"g":"saidoku","q":"再読文字の書き下し方として正しいものはどれか。","c":["一度目も二度目も漢字で書く","一度目をひらがな、二度目を漢字で書く","一度目を漢字、二度目をひらがなで書く","二度目は書かない"],"a":2,"e":"再読文字は、一度目の副詞は漢字のまま、二度目の助動詞・動詞はひらがなで書く。「未だ知らず」「将に行かんとす」がその形。"},{"g":"saidoku","q":"次のうち、再読文字でないものはどれか。","c":["猶","須","欲","盍"],"a":2,"e":"「欲」は「〜ントほっス」と読むが一度しか読まない。再読文字は未・将・且・当・応・宜・須・猶（由）・盍の九字。"},{"g":"hitei","q":"「子非魚」の書き下し文として正しいものはどれか。","c":["子は魚ならず","子は魚に非ず","子は魚を非とす","子は魚にあらずや"],"a":1,"e":"「非」は体言を打ち消して「〜ニあらズ」と読む。用言を打ち消す「不」との使い分けが問われる。（荘子・秋水）"},{"g":"hitei","q":"用言を打ち消すときに使う字として正しいものはどれか。","c":["非","無","不","勿"],"a":2,"e":"「不（弗）」は動作や状態を打ち消して「〜ず」と読む。体言は「非」、存在は「無」、禁止は「勿」で打ち消す。"},{"g":"hitei","q":"「過則勿憚改」の傍線部「勿」の意味として最も適当なものはどれか。","c":["〜するな","〜がない","〜ではない","まだ〜しない"],"a":0,"e":"「勿」は「〜なカレ」と読む禁止の字。「過ちては則ち改むるに憚ること勿かれ」で、改めることをためらうな、の意。（論語・学而）"},{"g":"hitei","q":"「無不知愛其親者」の意味として最も適当なものはどれか。","c":["親を愛することを知る者はどこにもいない","親を愛することを知らない者はいない","親を愛せと教える者はいない","親を愛さない者は許されない"],"a":1,"e":"「無A不B」は二重否定で、強い肯定になる。「其の親を愛するを知らざる者無し」＝誰もが親を愛することを知っている、の意。（孟子・尽心）"},{"g":"hitei","q":"「未嘗不嘆息也」の意味として最も適当なものはどれか。","c":["嘆息したことは一度もない","これまで嘆息しなかったことはない","嘆息すべきではない","嘆息する必要はまったくない"],"a":1,"e":"再読文字「未」と二重否定「不〜不」が重なった形。「未だ嘗て嘆息せずんばあらざるなり」＝必ず嘆息した、という強い肯定になる。"},{"g":"hitei","q":"「師不必賢於弟子」の意味として最も適当なものはどれか。","c":["師は必ず弟子より優れている","師が弟子より優れているとは限らない","師は決して弟子より優れていない","師も弟子も優れていない"],"a":1,"e":"「不必」は部分否定で「必ずしも〜ず」。打消の字の下に副詞があるので部分否定になる。（韓愈「師説」）"},{"g":"hitei","q":"「必不〜」の意味として正しいものはどれか。","c":["必ずしも〜とは限らない","必ず〜しない","二度と〜しない","まだ〜しない"],"a":1,"e":"副詞「必」が打消「不」の上にあるので全部否定で、「必ず〜しない」。下にあれば部分否定の「必ずしも〜ず」になる。"},{"g":"hitei","q":"部分否定と全部否定を見分ける決め手はどれか。","c":["文末の助字","副詞と打消の字の語順","主語の位置","返り点と送り仮名の種類"],"a":1,"e":"副詞が打消の字の下にあれば部分否定、上にあれば全部否定になる。意味ではなく語順で決まる。"},{"g":"hitei","q":"「不敢問」の意味として最も適当なものはどれか。","c":["思い切って問いただしてみる","とても尋ねることはできない","どうして問わないのか","問うてはならない"],"a":1,"e":"「不敢」は「あヘテ〜ず」で、進んで〜しようとはしない、の意。反対に「敢不〜乎」は「どうして〜しないでいられようか」となる。"},{"g":"hitei","q":"「非不説子之道」の説明として最も適当なものはどれか。","c":["先生の道を喜んでいないと述べている","二重否定で、実は喜んでいると述べている","先生の道を説明できないと述べている","先生の道を疑っていると述べている"],"a":1,"e":"「非不」は二重否定で強い肯定。「子の道を説ばざるに非ず」＝喜んでいないわけではない、の意で、下に「しかし力が足りない」と続く。（論語・雍也）"},{"g":"gimon","q":"「燕雀安知鴻鵠之志哉」の意味として最も適当なものはどれか。","c":["小鳥はどこで大鳥の志を知るのか","どうして小鳥に大鳥の志が分かろうか","小鳥も大鳥の志を知っている","小鳥は大鳥の志を知りたいと強く思っている"],"a":1,"e":"「安くんぞ〜んや」は反語。「いや、分からない」と裏返して訳す。文末の「ン（ヤ）」が反語の目印。（史記・陳渉世家）"},{"g":"gimon","q":"疑問と反語を見分ける手がかりとして最も確かなものはどれか。","c":["疑問詞の種類","文末の結び方","返り点の数","主語の有無"],"a":1,"e":"同じ疑問詞でも、文末が「〜や・か」なら疑問、推量の「〜ン（ヤ）」で結べば反語になる。結びで決まる。"},{"g":"gimon","q":"「豈不痛哉」の訳として最も適当なものはどれか。","c":["どうして痛まないのか","なんと痛ましいことではないか","痛くはないだろう","痛いかどうか分からない"],"a":1,"e":"「豈不〜哉」は反語の形を借りた詠嘆で、「なんと〜ではないか」と訳す。「豈に痛ましからずや」。"},{"g":"gimon","q":"「其人何如」の意味として最も適当なものはどれか。","c":["その人をどうしたらよいか","その人はどんな人物か","その人はどこにいるのか","その人は誰なのか"],"a":1,"e":"「何如」は状態・評価をたずねて「どうであるか」。手段をたずねる「如何（いかんセン）」と語順で区別する。"},{"g":"gimon","q":"「如之何」の読みとして正しいものはどれか。","c":["これをいかんせん","これなんぞや","これいづくんぞ","これをいかにぞ"],"a":0,"e":"「如何」の間に目的語が入った形で、「之を如何せん」と読む。「これをどうしたらよいか」と処置をたずねる。"},{"g":"gimon","q":"「女与回也孰愈」の傍線部「孰」の意味として最も適当なものはどれか。","c":["どちらが","どうして","どこで","いつ"],"a":0,"e":"「孰」は「いづレカ」と読み、二つ以上を比べてどちらかをたずねる。「女と回と孰れか愈れる」。（論語・公冶長）"},{"g":"gimon","q":"「学而時習之、不亦説乎」の「不亦〜乎」の働きとして最も適当なものはどれか。","c":["禁止","事実の確認を求める疑問","反語の形をとった詠嘆","仮定"],"a":2,"e":"「亦〜ずや」は「なんと〜ではないか」と、反語の形で喜びを強く言う詠嘆。（論語・学而）"},{"g":"gimon","q":"「何以知之」の傍線部「何以」の意味として最も適当なものはどれか。","c":["どうしてそれを知っているのか","いつそれを知ることになったのか","誰がそれを知っているのか","それを知ってどうするのか"],"a":0,"e":"「何を以て」は手段・理由をたずねる形。「以」は手段を示す前置詞で、「何によって」の意。"},{"g":"gimon","q":"「敢不従命乎」の意味として最も適当なものはどれか。","c":["命令に従うことはとてもできない","どうして命令に従わないでいられようか","命令に従ってはならない","命令に従うべきか迷っている"],"a":1,"e":"「敢不〜乎」は反語で、強い肯定になる。「敢へて命に従はざらんや」＝必ず従います、の意。「不敢」との違いに注意。"},{"g":"gimon","q":"「人生幾何」の傍線部の読みとして正しいものはどれか。","c":["いかんぞ","いくばくぞ","いづれぞ","なんすれぞ"],"a":1,"e":"「幾何」は「いくばくゾ」と読み、数量や程度をたずねる。「人生幾何ぞ」＝人の一生はどれほどのものか。"},{"g":"shieki","q":"「使人問之」の書き下し文として正しいものはどれか。","c":["人をして之を問はしむ","人に之を問ふ","人之を問はしむ","人をして之を問ふ"],"a":0,"e":"使役は「AヲシテBセしム」。使役の対象に「ヲシテ」を添え、文末を「しむ」で結ぶ。"},{"g":"shieki","q":"次のうち、使役を表す字でないものはどれか。","c":["令","遣","被","教"],"a":2,"e":"「被」は受身を表して「〜（ラ）ル」と読む。使・令・教・遣が使役の字。"},{"g":"shieki","q":"「信而見疑」の意味として最も適当なものはどれか。","c":["信じて疑いを見た","誠実でありながら疑われた","信用して疑わなかった","疑いをもって人を見た"],"a":1,"e":"動詞の上の「見」は受身を表し、「疑はる」と読む。「信にして疑はる」。（史記・屈原伝）"},{"g":"shieki","q":"「為天下笑」の書き下し文として正しいものはどれか。","c":["天下の為に笑ふ","天下の笑ふ所と為る","天下を笑ひと為す","天下と為りて笑ふ"],"a":1,"e":"「為A所B」は受身のもっとも明確な形で、「AのBする所と為る」と読む。天下の人に笑われる、の意。"},{"g":"shieki","q":"「労力者治於人」の傍線部「於」の働きとして最も適当なものはどれか。","c":["動作の行われる場所を示す","比較を示す","受身の動作主を示す","時を示す"],"a":2,"e":"動詞の下の「於＋人」は、行為をする側を示して受身を作る。「人に治めらる」。（孟子・滕文公）"},{"g":"shieki","q":"使役の文であることを示す、書き下し文での決め手はどれか。","c":["文末が「しむ」で結ばれる","文末が「なり」で結ばれる","文頭に「夫」がある","返り点が一二点になる"],"a":0,"e":"使役は「〜しム」で結ぶ。受身の「る・らル」と、この結びで区別できる。"},{"g":"shieki","q":"「命工作之」の意味として最も適当なものはどれか。","c":["職人に命じてこれを作らせた","職人の命令でこれを作った","職人になってこれを作った","職人にこれを作ることを禁じた"],"a":0,"e":"「命ジテ〜しム」は、命令を表す動詞による使役。「工に命じて之を作らしむ」。"},{"g":"shieki","q":"「於」が受身を作っていると判断できるのはどんなときか。","c":["「於」の後ろが場所のとき","「於」の後ろが動作をする人のとき","「於」が文の頭に置かれるとき","「於」に返り点が付くとき"],"a":1,"e":"「於」の後ろが動作主（人）なら受身、場所なら「〜において」、形容詞の下なら比較になる。後ろの語で判断する。"},{"g":"shieki","q":"次のうち、受身の形でないものはどれか。","c":["見疑","被殺","為A所B","使A為B"],"a":3,"e":"「使A為B」は使役で「AをしてBせしむ」。ほかの三つはいずれも受身の形。"},{"g":"shieki","q":"「沛公旦日従百余騎見項王」の「従」の読みとして最も適当なものはどれか。","c":["従ひて","従へて","従ふとも","従はしめ"],"a":1,"e":"沛公が百余騎を引き連れたのだから「従へて」と他動詞に読む。使役の字はないが、内容から使役に近く読む例。（史記・項羽本紀）"},{"g":"hikaku","q":"「霜葉紅於二月花」の傍線部「於」の働きとして最も適当なものはどれか。","c":["場所を示す","比較を示す","受身を示す","時を示す"],"a":1,"e":"形容詞「紅」の下の「於」は比較を作り、「〜よりも」と読む。「霜葉は二月の花よりも紅なり」。（杜牧「山行」）"},{"g":"hikaku","q":"「百聞不如一見」の意味として最も適当なものはどれか。","c":["百回聞けば一度見たことになる","百回聞くのは一度見るのに及ばない","百回聞いても一度も見ていない","一度見るより百回聞くほうがよい"],"a":1,"e":"「A不如B」は「AはBに如かず」で、Bのほうがよいという比較。（漢書・趙充国伝）"},{"g":"hikaku","q":"「知子莫若父」の意味として最も適当なものはどれか。","c":["子を知ることでは父に及ぶ者はない","父は自分の子のことを知らないものだ","子は父に似ている","父を知る子はいない"],"a":0,"e":"「莫如（莫若）」は最上を表し、「〜に及ぶものはない」の意。「子を知るは父に若くは莫し」。"},{"g":"hikaku","q":"「与其奢也寧倹」の書き下し文として正しいものはどれか。","c":["其の奢りと寧ろ倹となり","其の奢らんよりは寧ろ倹なれ","其の奢るは寧ろ倹に与す","奢ると倹と其れ寧ろいづれぞ"],"a":1,"e":"「与其A寧B」は「其のAせんよりは寧ろB」と読み、AよりBを選ぶ形。（論語・八佾）"},{"g":"hikaku","q":"「吾孰与徐公美」の意味として最も適当なものはどれか。","c":["私は徐公とともに美しい","私と徐公とではどちらが美しいか","私は徐公より美しくない","徐公はどうして美しいのか"],"a":1,"e":"「孰与」は二つを比べて「どちらが〜か」とたずねる。（戦国策・斉策、鄒忌の話）"},{"g":"hikaku","q":"「不如」と「莫如」の違いとして最も適当なものはどれか。","c":["不如は最上、莫如は二者の比較を表す","不如は二者の比較、莫如は最上を表す","どちらも同じ意味で使い分けはない","不如は疑問、莫如は反語を表す"],"a":1,"e":"「不如」はAとBを比べてBがよいとし、「莫如」は「これに及ぶものはない」と最上を表す。"},{"g":"hikaku","q":"「寧為鶏口、無為牛後」の意味として最も適当なものはどれか。","c":["鶏の口にも牛の尻にも決してなってはならない","むしろ鶏の口となっても牛の尻にはなるな","牛の尻になってでも生きのびよ","鶏も牛も同じようなものだ"],"a":1,"e":"「寧A無B」は選択で、「むしろAして、Bするな」の意。大きな組織の末端でいるより、小さくとも長になれ、という教え。（史記・蘇秦列伝）"},{"g":"hikaku","q":"比較の「於」を見つける手がかりとして最も適当なものはどれか。","c":["「於」の上が形容詞・状態の語である","「於」の上が人名や地名である","「於」が文末にある","「於」に返り点が付かない"],"a":0,"e":"上が形容詞・状態を表す語なら比較、下が動作主なら受身、下が場所なら「〜において」。上下の語で判断する。"},{"g":"hikaku","q":"「季氏富於周公」の訳として最も適当なものはどれか。","c":["季氏は周公のために富ませられた","季氏は周公よりも富んでいた","季氏は周公において富んだ","季氏は周公に富まされた"],"a":1,"e":"形容詞「富」の下の「於」なので比較。「季氏は周公よりも富めり」。（論語・先進）"},{"g":"hikaku","q":"「与其〜」を見たとき、下に探すべき語として最も適当なものはどれか。","c":["乎・哉・也","寧・不如・孰若","不・非","而・於"],"a":1,"e":"「与其A」は「寧B」「不如B」「孰若B」と組になって選択を表す。片方だけでは形が完成しない。"},{"g":"gentei","q":"「唯仁者能好人」の傍線部「唯」の意味として最も適当なものはどれか。","c":["ただ〜だけが","もっぱら〜したい","かならず〜する","まだ〜しない"],"a":0,"e":"「唯（惟・只・但）」は「たダ〜ノミ」と読み、範囲を限る。「唯だ仁者のみ能く人を好む」。（論語・里仁）"},{"g":"gentei","q":"限定を表すとき、文末に置かれる字として最も適当なものはどれか。","c":["哉","耳","乎","焉"],"a":1,"e":"「耳・爾・已・而已」は「〜ノミ」と読んで限定・断定を表し、上の「唯・但」と呼応する。"},{"g":"gentei","q":"「直不百歩耳」の意味として最も適当なものはどれか。","c":["まっすぐ百歩も行かなかった","ただ百歩でなかっただけだ","百歩しか進めなかった","百歩も進んだのだ"],"a":1,"e":"「直（た）だ〜のみ」で限定。五十歩逃げた者も逃げたことに変わりはない、という文脈。（孟子・梁恵王）"},{"g":"gentei","q":"「非唯有才、亦有徳」の意味として最も適当なものはどれか。","c":["才能はないけれども徳だけはある","才能があるだけでなく、徳もある","才能も徳もない","才能があるので徳はいらない"],"a":1,"e":"「非唯A亦B」は累加で、「唯だにAのみならず、亦たB」と読む。「不独」「非独」も同じ形。"},{"g":"gentei","q":"「死馬且買之、況生者乎」の意味として最も適当なものはどれか。","c":["死んだ馬は買うけれども、生きている馬は買わないのだ","死んだ馬でさえ買うのだから、生きた馬はなおさらだ","死んだ馬も生きた馬も買わない","生きた馬を買ってから死んだ馬を買う"],"a":1,"e":"「且A況B乎」は抑揚。軽いものを挙げてから、まして重いものは、と進める。（戦国策・燕策）"},{"g":"gentei","q":"抑揚の形で、「A」の側に立つ字として最も適当なものはどれか。","c":["且・猶・尚","豈・寧","唯・但","勿・毋"],"a":0,"e":"「Aすら且つ（猶ほ・尚ほ）〜、況んやB をや」の形になる。下の「況んや」と組で働く。"},{"g":"gentei","q":"「況」の読みとして正しいものはどれか。","c":["いはんや","まさに","すなはち","なほ"],"a":0,"e":"「況」は「いはンヤ〜ヲや」と読み、まして〜はなおさらだ、と強める。抑揚の後半を受け持つ。"},{"g":"gentei","q":"「独〜耳」の意味として最も適当なものはどれか。","c":["ひとりで〜する","ただ〜だけだ","どうして〜か","〜してはならない"],"a":1,"e":"「独」も限定を表して「ひとリ〜ノミ」と読む。反語と結びつくと「どうして〜だけが」となる場合もある。"},{"g":"gentei","q":"限定の形を作るとき、上と下で呼応する組み合わせとして正しいものはどれか。","c":["唯 と 耳","豈 と 乎","与其 と 寧","雖 と 則"],"a":0,"e":"限定は上に「唯・惟・只・但」、下に「耳・爾・已・而已」を置いて呼応する。"},{"g":"gentei","q":"次の文のうち、累加の形になっているものはどれか。","c":["唯仁者能好人","不独有才、且有勇","豈不痛哉","雖有嘉肴、弗食不知其旨"],"a":1,"e":"「不独A、且B」は「独りAのみならず、且つB」で累加。ほかは限定・詠嘆・逆接の形。"},{"g":"katei","q":"「如有王者」の傍線部「如」の読みとして最も適当なものはどれか。","c":["ごとし","しく","もし","ゆく"],"a":2,"e":"仮定を表す「如（若・苟）」は「もシ〜バ」と読む。「如し王者有らば」。比況の「ごとシ」と読み分ける。"},{"g":"katei","q":"「雖有嘉肴、弗食不知其旨也」の「雖」の意味として最も適当なものはどれか。","c":["もし〜ならば","〜ではあるけれども","〜するたびに","〜してはならない"],"a":1,"e":"「雖」は「〜トいへどモ」と読み、事実を認めた上での逆接。「嘉肴有りと雖も」。（礼記・学記）"},{"g":"katei","q":"「縦」と「雖」の違いの説明として最も適当なものはどれか。","c":["縦はまだ起きていない仮定、雖は事実の逆接","縦はすでに起きた事実、雖は未来の仮定を表す","どちらも禁止を表す","縦は疑問、雖は反語を表す"],"a":0,"e":"「縦（たとヒ）〜トモ」は仮定の逆接、「雖（〜トいへどモ）」は確定の逆接。文脈でどちらかを見分ける。"},{"g":"katei","q":"「学而不思則罔」の傍線部「則」の働きとして最も適当なものはどれか。","c":["すぐに、の意を添える","条件と結果をつなぐ","そのたびに、の意を添える","意外だ、の意を添える"],"a":1,"e":"「則」は「〜ならば、そのときは」と条件と結果をつなぐ。「学びて思はざれば則ち罔し」。（論語・為政）"},{"g":"katei","q":"「縦江東父兄憐而王我、我何面目見之」の意味として最も適当なものはどれか。","c":["江東の人々が王にしてくれたので喜んで会おう","たとえ王にしてくれても、どんな顔で会えようか","江東の人々は私を王にしなかった","江東の人々に会って王になりたい"],"a":1,"e":"「縦ひ〜とも」の仮定の逆接に、反語「何の面目ありて〜見えん」が続く。（史記・項羽本紀）"},{"g":"katei","q":"「苟」の読みと意味の組み合わせとして正しいものはどれか。","c":["いやしクモ／仮にも","かりニ／しばらく","もとヨリ／もともと","たまたま／偶然"],"a":0,"e":"「苟」は「いやしクモ」と読んで「仮にも・かりにも」の意。仮定を表して「もシ」と読むこともある。"},{"g":"katei","q":"仮定の文で、結びに現れる送り仮名として最も適当なものはどれか。","c":["〜バ","〜ヤ","〜ノミ","〜シム"],"a":0,"e":"仮定条件は「〜バ」で結ぶ。未然形＋バなら仮定、已然形＋バなら確定になるのは古文と同じ。"},{"g":"katei","q":"「乃」の「すなはチ」の働きとして最も適当なものはどれか。","c":["条件と結果をつなぐ","そこでやっと、意外にも","そのたびごとに繰り返し","ただ〜だけ"],"a":1,"e":"「乃」は前を受けて改まって続け、「そこでやっと・意外にも」の気持ちを含む。すぐに、なら「即」。"},{"g":"katei","q":"「使民不飢」を仮定に読むとき、「使」の読みとして最も適当なものはどれか。","c":["しめば","しむ","つかふ","ためし"],"a":0,"e":"「使・令」は仮定を作ることがあり、「〜しめば（もし〜させたら）」と読む。使役の「しむ」と文脈で区別する。"},{"g":"katei","q":"次のうち、確定の逆接を表すものはどれか。","c":["縦","若","雖","苟"],"a":2,"e":"「雖」だけが「〜ではあるけれども」と事実を認めた逆接。ほかは仮定を作る字。"},{"g":"ganbou","q":"「願先生教之」の傍線部「願」の読みとして正しいものはどれか。","c":["ねがはくは","ねがひて","ねがふに","ねがはしむ"],"a":0,"e":"願望の「願」は「ねがハクハ」と読み、「どうか〜してください」と相手に願う。"},{"g":"ganbou","q":"「請以剣舞」の意味として最も適当なものはどれか。","c":["どうか剣で舞うのを見せてください","どうか剣で舞わせてください","剣で舞うのをやめてほしい","剣で舞うことができない"],"a":1,"e":"「請」は自分がすることを丁重に申し出る形。「請ふ剣を以て舞はん」。（史記・鴻門の会）"},{"g":"ganbou","q":"「欲」の読みとして正しいものはどれか。","c":["まさに〜んとす","〜せんとほつす","よろしく〜べし","なほ〜ごとし"],"a":1,"e":"「欲」は「〜（セ）ントほつス」と読み、一度しか読まない。再読文字の「将」と混同しやすい。"},{"g":"ganbou","q":"「嗚呼哀哉」の読みとして正しいものはどれか。","c":["ああ哀しいかな","ああ哀しむや","嗚呼して哀しむ","哀しきかな嗚呼"],"a":0,"e":"文頭の「嗚呼（噫）」は「ああ」と読み、文末の「哉」と呼応して詠嘆になる。"},{"g":"ganbou","q":"「何其愚也」の意味として最も適当なものはどれか。","c":["どうして愚かなのか理由を問う","なんと愚かなことか","愚かではない","愚かにならないようにせよ"],"a":1,"e":"「何ゾ其レ〜や」は疑問の形を借りた詠嘆で、程度のはなはだしさに驚く言い方。"},{"g":"ganbou","q":"「豈不痛哉」と「豈知之乎」の違いとして最も適当なものはどれか。","c":["前者は詠嘆、後者は反語","前者は反語、後者は詠嘆","どちらも疑問である","どちらも禁止である"],"a":0,"e":"「豈不〜哉」は「なんと〜ではないか」と詠嘆になり、「豈〜乎（ンヤ）」は「どうして〜だろうか、いや〜ない」と反語になる。"},{"g":"ganbou","q":"文末に置いて詠嘆を表す字の組み合わせとして正しいものはどれか。","c":["哉・乎・夫","不・弗・無","使・令・教","唯・但・只"],"a":0,"e":"「哉・乎・夫・矣」などが文末で「〜かな」と詠嘆を表す。文頭の「嗚呼」と呼応することが多い。"},{"g":"ganbou","q":"「我欲仁、斯仁至矣」の意味として最も適当なものはどれか。","c":["私が仁を求めれば、仁はやってくる","私は仁を求めようとは思わないのだ","仁はいつか来るだろう","仁を求めるのは難しい"],"a":0,"e":"「欲」は「〜したいと思う」。仁は遠いものではない、という文脈。（論語・述而）"},{"g":"ganbou","q":"「庶幾」の読みとして正しいものはどれか。","c":["こひねがはくは","すべからく","いくばくぞ","しばしば"],"a":0,"e":"「庶幾」は「こひねがハクハ」と読み、「どうか〜であってほしい」と強く願う形。"},{"g":"ganbou","q":"次のうち、願望を表さないものはどれか。","c":["願","請","欲","雖"],"a":3,"e":"「雖」は「〜といへども」と読む逆接の字。ほかの三つは願望を表す。"},{"g":"okiji","q":"「学而時習之」の傍線部「而」の書き下し方として正しいものはどれか。","c":["而を「しかして」と読んで書き下しに入れる","上の語を「びて」と送り、而は書かない","而を「しかも」と書く","而を「て」と書く"],"a":1,"e":"「而」は置き字で書き下し文には書かない。上の語を「テ・デ」と送って接続を表す。「学びて時に之を習ふ」。"},{"g":"okiji","q":"「青出於藍」の書き下し文として正しいものはどれか。","c":["青は藍に出づ","青は藍より出づ","青は藍を出づ","青は藍において出づ"],"a":1,"e":"「於」は置き字で、ここでは起点を示すので下を「ヨリ」と送る。（荀子・勧学）"},{"g":"okiji","q":"次のうち、置き字でないものはどれか。","c":["矣","兮","者","焉"],"a":2,"e":"「者」は「〜ハ」「〜もノ」と読んで意味を担う。矣・焉・兮は読まない置き字。"},{"g":"okiji","q":"「己所不欲、勿施於人」の傍線部「所」の働きとして最も適当なものはどれか。","c":["下の動詞を体言にする","受身を作る","禁止を表す","二つのものを比べて示す"],"a":0,"e":"「所」は下の動詞をまとめて「〜するもの・〜すること」にする。「己の欲せざる所」。（論語・衛霊公）"},{"g":"okiji","q":"「牛何之」の傍線部「之」の読みとして正しいものはどれか。","c":["の","これ","ゆく","この"],"a":2,"e":"ここでの「之」は述語になっているので動詞「ゆク（行く）」。「牛何くにか之く」。（孟子・梁恵王）"},{"g":"okiji","q":"文中に置かれた「也」の読みとして最も適当なものはどれか。","c":["なり","や","かな","のみ"],"a":1,"e":"文中の「也」は「や」と読んで主題を示し、「〜は」に当たる。文末なら「なり」で断定になる。"},{"g":"okiji","q":"「以五十歩笑百歩」の傍線部「以」の働きとして最も適当なものはどれか。","c":["理由を示す","目的語を示す","受身を示す","禁止を示す"],"a":1,"e":"「以」は「〜を以て」と読んで、下の動詞の目的語や手段を示す。「五十歩を以て百歩を笑ふ」。（孟子・梁恵王）"},{"g":"okiji","q":"「知者楽水」の傍線部「者」の働きとして最も適当なものはどれか。","c":["問いかけの意味を表す","「〜する人」を表す","禁止を表す","比較を表す"],"a":1,"e":"「者」は「〜する者・〜するもの」を表し、上をまとめて主題にする。「知者は水を楽しむ」。（論語・雍也）"},{"g":"okiji","q":"「吾与女弗如也」の傍線部「与」の読みとして最も適当なものはどれか。","c":["と","あたふ","くみす","や"],"a":0,"e":"ここでの「与」は並列の「と」。ほかに「与ふ（与える）」「与す（味方する）」、文末なら「や・か」と読む。（論語・公冶長）"},{"g":"okiji","q":"置き字を書き下し文でどう扱うかとして正しいものはどれか。","c":["ひらがなに直して書く","漢字のまま書く","書かずに、送り仮名で表す","下の語と入れ替えて書く"],"a":2,"e":"置き字は読まないので書き下し文に書かない。かわりに「学びて」「藍より」のように送り仮名として表れる。"},{"g":"kundoku","q":"一字だけ上に返って読むときに使う返り点はどれか。","c":["レ点","一二点","上中下点","甲乙丙点"],"a":0,"e":"一字返りは必ずレ点を使う。二字以上へだてて返るときは一二点になる。"},{"g":"kundoku","q":"一二点をはさんで、さらに上に返るときに使う返り点はどれか。","c":["レ点","上中下点","天地人点","一レ点"],"a":1,"e":"返り点の強さはレ点＜一二点＜上中下点＜甲乙丙点＜天地人点。一二点の外側は上中下点になる。"},{"g":"kundoku","q":"書き下し文で、ひらがなに直して書く字の組み合わせとして正しいものはどれか。","c":["不・可・也・如","而・於・矣・焉","者・所・之・以","唯・但・独・只"],"a":0,"e":"助詞・助動詞にあたる字（不→ず、可→べし、也→なり、如→ごとし）はひらがなに直す。二つ目の組は置き字で、書かない。"},{"g":"kundoku","q":"「春眠不覚暁」を書き下したものとして正しいものはどれか。","c":["春眠暁を覚えず","春眠暁を不覚","春の眠り暁を覚えざり","春眠は暁を覚えぬなり"],"a":0,"e":"「不」は助動詞なのでひらがなで「ず」と書く。（孟浩然「春暁」）"},{"g":"kundoku","q":"返読文字の説明として最も適当なものはどれか。","c":["必ず下から返って読む字","二度読む字","読まない字","かならず文末に置かれる字"],"a":0,"e":"不・無・非・未・可・有・所・為・使などは必ず下から返って読むため、そこに返り点が付く。"},{"g":"kundoku","q":"送り仮名の書き方として正しいものはどれか。","c":["漢字の右下にカタカナ・歴史的仮名遣いで書く","漢字の左下にひらがなで書く","漢字の上にカタカナで書く","漢字の右下にひらがな・現代仮名遣いで書く"],"a":0,"e":"送り仮名は漢字の右下に、カタカナ・歴史的仮名遣いで小さく書く。返り点は左下に付く。"},{"g":"kundoku","q":"二字以上の熟語にまとめて返って読むことを示す記号はどれか。","c":["ハイフン（縦線）","二重のレ点","丸印","波線"],"a":0,"e":"熟語の間に縦線（ハイフン）を引き、返り点は下の字の左下に付ける。「能＝読」のように一語として読む。"},{"g":"kundoku","q":"再読文字を書き下すときのきまりとして正しいものはどれか。","c":["二度目をひらがなで書く","一度目をひらがなで書く","二度目は書かない","両方とも漢字で書く"],"a":0,"e":"一度目の副詞は漢字のまま、二度目の助動詞・動詞はひらがなで書く。「未だ知らず」「将に行かんとす」。"},{"g":"kundoku","q":"白文に返り点を付けるときの手順として最も適当なものはどれか。","c":["読む順に番号を振り、返る幅で記号を選ぶ","文末から順にレ点を付けていく","まず一二点だけを全部付けてから直していく","送り仮名を全部付けてから考える"],"a":0,"e":"読む順を番号で確かめてから、一字返りはレ点、二字以上は一二点、その外側は上中下点、と幅に応じて選ぶ。"},{"g":"kundoku","q":"「白文」の説明として正しいものはどれか。","c":["訓点のない原文","訓点を付けた文","漢字仮名交じりに書き改めた文","現代語に訳した文"],"a":0,"e":"白文＝訓点のない原文、訓読文＝訓点を付けたもの、書き下し文＝漢字仮名交じりに書き改めたもの。"}];
+  var GUIDES = {"saidoku":"## 再読文字とは\n\n一つの字を**二回読む**字。一度目は右の送り仮名で副詞として、二度目は左下の送り仮名で動詞・助動詞として読む。書き下し文では、**二度目をひらがなで書く**。\n\n| 字 | 読み | 意味 |\n| --- | --- | --- |\n| 未 | いまダ〜ず | まだ〜しない |\n| 将・且 | まさニ〜ントす | 今にも〜しようとする |\n| 当・応 | まさニ〜ベシ | 当然〜すべきだ／きっと〜だろう |\n| 宜 | よろシク〜ベシ | 〜するのがよい |\n| 須 | すべかラク〜ベシ | ぜひ〜する必要がある |\n| 猶・由 | なホ〜ノ／ガごとシ | ちょうど〜のようだ |\n| 盍 | なんゾ〜ざル | どうして〜しないのか |\n\n## つまずくところ\n\n- **当と応の違い**。当は「当然そうすべきだ」（義務）、応は「きっとそうだろう」（推量）。\n- **猶の下の送り仮名**。体言には「ノ」、用言や句には「ガ」を添える。\n- **且は読み分ける**。再読なら「まさニ〜ントす」、副詞なら「かツ（その上）」。\n- **盍は「何不」がまとまった字**。「どうして〜しないのか」という勧めの気持ちを含む。\n","hitei":"## 打消の字の使い分け\n\n| 字 | 読み | 何を打ち消すか |\n| --- | --- | --- |\n| 不・弗 | 〜ず | 用言（動作・状態） |\n| 無・莫・毋 | なシ | 存在 |\n| 非 | 〜ニあらズ | 体言（〜ではない） |\n| 未 | いまダ〜ず | まだ実現していない |\n| 勿・莫・毋・無 | 〜なカレ | 禁止（〜するな） |\n\n## 二重否定は強い肯定\n\n「無A不B（AでBしないものはない）」「非不（〜しないのではない）」「未嘗不（〜しなかったことはない）」は、**打ち消しを重ねて強く肯定する**形。訳すときは肯定に直すと分かりやすい。\n\n## 部分否定と全部否定\n\n**語順で決まる。** 副詞が打消の字の**下**にあれば部分否定、**上**にあれば全部否定。\n\n| 形 | 読み | 意味 |\n| --- | --- | --- |\n| 不必 | 必ずしも〜ず | 〜とは限らない（部分） |\n| 必不 | 必ず〜ず | 必ず〜しない（全部） |\n| 不復 | 復た〜ず | 二度とは〜しない（部分） |\n| 復不 | 復た〜ず | またもや〜しない（全部） |\n| 不倶 | 倶には〜ず | 両方ともには〜しない（部分） |\n","gimon":"## 疑問と反語は「結び」で見分ける\n\n同じ疑問詞でも、**文末の読み方**で疑問か反語かが決まる。\n\n| | 文末 | 例 |\n| --- | --- | --- |\n| 疑問 | 〜（スル）や・か | 何為れぞ去らざる**や** |\n| 反語 | 〜ン（ヤ） | 安くんぞ知ら**ん**や |\n\n**反語は「〜だろうか、いや〜ない」と裏返して訳す。** 推量の「ン」が出てきたら反語を疑う。\n\n## おもな疑問詞\n\n| 字 | 読み | 問うもの |\n| --- | --- | --- |\n| 何・胡 | なんゾ・なにヲカ | 理由・事物 |\n| 安・悪・焉 | いづクンゾ・いづクニカ | 理由・場所 |\n| 誰・孰 | たれカ・いづレカ | 人・選択 |\n| 幾何 | いくばくゾ | 数量 |\n| 何如 | いかん | 状態・評価 |\n| 如何・奈何 | いかんセン | 手段・処置 |\n\n## 何如と如何\n\n**語順で区別する。** 「何如」は状態をたずねて「どうであるか」、「如何」は手段をたずねて「どうしたらよいか」。\n","shieki":"## 使役\n\n**「AヲシテBセしム」**の形。使・令・教・遣はどれも同じ働きをする。\n\n- 使・令・教・遣 A B → AにBさせる\n- 命ジテ・勧メテ・説キテ 〜しム → 動詞そのものが使役を作る\n- **文脈上の使役** — 使役の字がないのに、内容から「しム」と読む形もある\n\n**見分けの決め手は「しム」で結ぶこと。**\n\n## 受身\n\n| 形 | 読み |\n| --- | --- |\n| 見・被＋動詞 | 〜（ル・ラル） |\n| 為A所B | AノBスルところトなル |\n| 動詞＋於（于・乎）＋人 | 人ニ〜（ラ）ル |\n\n**「於」の後ろが動作の主（人）なら受身。** 場所や比較の「於」と区別する。\n","hikaku":"## 比較\n\n**形容詞・状態を表す語の下の「於（于・乎）」は比較。** 「AハBよリ（モ）〜」と読む。\n\n> 霜葉紅**於**二月花 → 霜葉は二月の花**よりも**紅なり\n\n## 及ばない・一番だ\n\n| 形 | 読み | 意味 |\n| --- | --- | --- |\n| A不如B | AはBに如かず | AはBに及ばない＝Bがよい |\n| 莫如A・莫若A | Aに如くは莫し | Aに及ぶものはない＝Aが一番 |\n\n「不如」は二つを比べ、「莫如」は最上を表す。\n\n## 選択\n\n| 形 | 読み | 意味 |\n| --- | --- | --- |\n| 与其A寧B | 其のAせんよりは寧ろB | AよりむしろBがよい |\n| 孰与・孰若 | 〜と〜と孰れぞ | どちらが〜か |\n\n**「与其」を見たら、下に「寧・不如・孰若」が来ないか探す。** 二つで一組になる。\n","gentei":"## 限定\n\n**上の「唯・惟・只・但・徒・独」と、文末の「耳・爾・已・而已」が呼応する。**\n\n> 唯仁者**能**好人 → **唯だ**仁者**のみ**能く人を好む\n\n文末の「ノミ」だけで限定を表すこともある（直だ百歩ならざる**のみ**）。\n\n## 累加\n\n**非唯A亦B**（唯だにAのみならず、亦たB）＝Aだけでなく、Bもまた。\n「不独」「非独」も同じ。下は「亦・又・且」で受ける。\n\n## 抑揚\n\n**且A況B乎**（AすらかつB、況んやBをや）。\n\n> 死馬**且**買之、**況**生者**乎** → 死んだ馬でさえ買うのだ、まして生きた馬はなおさらだ\n\n**軽いものを先に挙げて、重いものを強調する。** 「猶・尚」も「A」の側に立つ。\n","katei":"## 仮定\n\n| 字 | 読み | 意味 |\n| --- | --- | --- |\n| 若・如・苟 | もシ〜バ | もし〜ならば |\n| 縦・仮令 | たとヒ〜トモ | たとえ〜としても |\n| 使・令 | 〜しメバ | もし〜させたら |\n\n**結びは「〜バ」。** 「苟くも」は「仮にも・いやしくも」と訳す。\n\n## 逆接\n\n**雖**（〜トいへどモ）は、**事実を認めた上での逆接**。「縦（たとヒ）」は、まだ起きていないことの仮定なので、そこが違う。\n\n> 雖有嘉肴 → よい料理が**あっても**（実際にある）\n> 縦江東父兄憐我 → **たとえ**あわれんでくれた**としても**（まだ起きていない）\n\n## 則\n\n「則（すなはチ）」は条件と結果をつなぐ。「即・乃・便・輒」も「すなはチ」と読むが働きが違う。\n\n| 字 | 働き |\n| --- | --- |\n| 則 | 〜ならば、そのときは |\n| 即 | すぐに・ほかでもなく |\n| 乃 | そこでやっと・意外にも |\n| 輒 | そのたびに |\n","ganbou":"## 願望\n\n| 形 | 読み | 意味 |\n| --- | --- | --- |\n| 願 | ねがハクハ〜 | どうか〜してください |\n| 請 | こフ〜 | どうか〜させてください |\n| 欲 | 〜（セ）ントほつス | 〜したいと思う |\n| 庶幾 | こひねがハクハ | どうか〜であってほしい |\n\n**「欲」は再読文字ではない。** 「将（まさニ〜ントす）」と形が似るので注意する。\n\n## 感嘆\n\n| 形 | 読み |\n| --- | --- |\n| 嗚呼・噫 | ああ |\n| 何其〜也 | なんゾそレ〜や |\n| 豈不〜哉 | あニ〜ずや |\n| 〜哉・〜乎・〜夫・〜矣 | 〜かな |\n\n**反語の形を借りた詠嘆が多い。** 「豈不〜哉」「不亦〜乎」は、問いの形で強く言い切っている。\n","okiji":"## 置き字（読まない字）\n\n| 字 | 働き | 送り仮名 |\n| --- | --- | --- |\n| 而 | 接続 | 上を「テ・デ」（順接）「モ」（逆接） |\n| 於・于・乎 | 場所・時・対象・比較・受身 | 下を「ニ・ト・ヨリ・ヲ」 |\n| 矣・焉 | 文末の断定・完了 | なし |\n| 兮 | 韻文の調子 | なし |\n\n**置き字は書き下し文に書かない。** そのかわり、送り仮名として痕跡が残る。\n\n## 読む助字\n\n| 字 | 読み | 働き |\n| --- | --- | --- |\n| 也 | なり／や | 文末は断定、文中は主題 |\n| 者 | 〜ハ／〜もノ | 主題の提示・「〜する者」 |\n| 所 | 〜スルところ | 下の動詞を体言にする |\n| 之 | の／これ／ゆク | 連体・代名詞・動詞 |\n| 以 | もつテ | 手段・目的語の提示 |\n| 与 | と／あたフ／や | 並列・与える・疑問 |\n\n**「之」は位置で決まる。** 名詞に挟まれれば「の」、動詞の下なら「これ」、単独で述語なら「ゆク」。\n","kundoku":"## 返り点の強さ\n\n**レ点 ＜ 一二点 ＜ 上中下点 ＜ 甲乙丙点 ＜ 天地人点**\n\n- **一字返り**はレ点。二字以上返るときは使えない\n- **二字以上へだてて返る**なら一二点\n- **一二点をはさんでさらに返る**なら上中下点\n- レ点と一点を兼ねる「一レ点」、上点を兼ねる「上レ点」もある\n\n## 書き下し文の三つのきまり\n\n1. **助詞・助動詞にあたる漢字はひらがなに直す**（不→ず、可→べし、也→なり、如→ごとし、使→しむ、耳→のみ）\n2. **置き字は書かない**（而・於・于・乎・矣・焉・兮）\n3. **歴史的仮名遣いで書く**（思ふ・あはれ・せう）\n\n## 返読文字\n\n必ず下から返って読む字。見つけたらそこに返り点が付く。\n\n> 不・無・非・未・可・有・多・少・易・難・所・為・被・見・使・令・自・従・与・毎\n"};
+  var WORDS = [];
+
+  var els = {};
+  ["unit-groups","selected-unit-box","selected-unit-label","selected-unit-count",
+   "btn-make-quiz","btn-view-guide",
+   "error-banner","error-text","error-close",
+   "view-setup","view-quiz","view-result","view-guide","view-stats",
+   "quiz-count","quiz-score","quiz-unit","quiz-dots","quiz-prompt","quiz-question","quiz-source","quiz-choices",
+   "quiz-feedback","feedback-verdict","feedback-head","feedback-explanation","feedback-translation","feedback-translation-text","feedback-meta",
+   "btn-next-question",
+   "result-frac","result-message","btn-retry-quiz","btn-new-quiz","btn-guide-from-result","btn-change-unit",
+   "guide-content","btn-guide-back","btn-guide-quiz",
+   "stats-body","btn-stats","btn-stats-back","btn-stats-reset","btn-stats-from-result",
+   "btn-wrongbox","btn-wrong-only","range-from","range-to","btn-range"
+  ].forEach(function(id){ els[id.replace(/-([a-z])/g, function(_,c){return c.toUpperCase();})] = document.getElementById(id); });
+
+  var SET_SIZE = 10;
+  var quizData = [];
+  var currentIndex = 0;
+  var score = 0;
+  var results = [];
+  var selectedUnit = null;
+  var isWrongReview = false;
+
+  // 問題文と正解から安定したIDを作る（データの並び順が変わってもずれない）
+  function qid(text){
+    var h = 5381, s = String(text);
+    for(var i=0;i<s.length;i++){ h = ((h*33) ^ s.charCodeAt(i)) >>> 0; }
+    return h.toString(36);
+  }
+  var QID_MAP = {};
+  POOL.forEach(function(q){
+    q.id = qid(q.q + "|" + q.c[q.a]);
+    QID_MAP[q.id] = q;
+  });
+
+  // ===================== 学習記録（この端末のブラウザ内だけに保存） =====================
+  var RECENT_MAX = 60;
+  var DAYS_MAX  = 400;
+
+  function emptyStore(){ return { units:{}, wrong:[], recent:{}, days:[] }; }
+
+  var store = (function(){
+    try{
+      var raw = window.localStorage.getItem(CONFIG.storeKey);
+      if(!raw) return emptyStore();
+      var o = JSON.parse(raw);
+      return {
+        units:  o.units  || {},
+        wrong:  Array.isArray(o.wrong) ? o.wrong : [],
+        recent: o.recent || {},
+        days:   o.days   || []
+      };
+    }catch(e){ return emptyStore(); }
+  })();
+
+  var storageOK = true;
+  function saveStore(){
+    try{ window.localStorage.setItem(CONFIG.storeKey, JSON.stringify(store)); }
+    catch(e){ storageOK = false; }
+  }
+
+  function rangeUnit(from, to){
+    return { id: "r" + from + "-" + to, label: "No." + from + "〜" + to, from: from, to: to };
+  }
+
+  function findUnit(uid){
+    var found = null;
+    UNITS.forEach(function(g){
+      g.items.forEach(function(it){ if(it.id === uid) found = it; });
+    });
+    if(!found){
+      var m = /^r(\d+)-(\d+)$/.exec(uid);
+      if(m) found = rangeUnit(+m[1], +m[2]);
+    }
+    return found;
+  }
+  function unitLabelOf(uid){
+    var u = findUnit(uid);
+    return u ? u.label : uid;
+  }
+
+  function poolOf(unit){
+    if(unit.from){
+      return POOL.filter(function(q){ return q.no >= unit.from && q.no <= unit.to; });
+    }
+    return POOL.filter(function(q){ return q.g === unit.id; });
+  }
+
+  function todayKey(){
+    var d = new Date();
+    function p(n){ return (n<10?"0":"") + n; }
+    return d.getFullYear() + "-" + p(d.getMonth()+1) + "-" + p(d.getDate());
+  }
+
+  function recordAnswer(id, isCorrect){
+    var at = store.wrong.indexOf(id);
+    if(isCorrect){
+      if(at >= 0) store.wrong.splice(at, 1);   // 正解したら苦手ボックスから外す
+    } else if(at < 0){
+      store.wrong.push(id);
+    }
+  }
+
+  function recordQuizFinished(unitId, asked, correct){
+    var u = store.units[unitId] || { attempts:0, asked:0, correct:0, last:"" };
+    u.attempts += 1;
+    u.asked    += asked;
+    u.correct  += correct;
+    u.last      = todayKey();
+    store.units[unitId] = u;
+    if(store.days.indexOf(u.last) < 0){
+      store.days.push(u.last);
+      if(store.days.length > DAYS_MAX) store.days = store.days.slice(-DAYS_MAX);
+    }
+    saveStore();
+  }
+
+  function rememberAsked(unitId, questions){
+    var seen = store.recent[unitId] || [];
+    questions.forEach(function(q){
+      var at = seen.indexOf(q.id);
+      if(at >= 0) seen.splice(at, 1);
+      seen.push(q.id);
+    });
+    if(seen.length > RECENT_MAX) seen = seen.slice(-RECENT_MAX);
+    store.recent[unitId] = seen;
+    saveStore();
+  }
+
+  function wrongBoxQuestions(limit){
+    var out = [];
+    store.wrong.forEach(function(id){ if(QID_MAP[id]) out.push(QID_MAP[id]); });
+    return shuffleArray(out).slice(0, limit || SET_SIZE);
+  }
+  function wrongBoxCount(){
+    return store.wrong.filter(function(id){ return QID_MAP[id]; }).length;
+  }
+
+  function switchView(name){
+    ["setup","quiz","result","guide","stats"].forEach(function(v){
+      els["view"+v[0].toUpperCase()+v.slice(1)].hidden = (v !== name);
+    });
+    window.scrollTo(0, 0);
+  }
+
+  function showError(msg){
+    els.errorText.textContent = msg;
+    els.errorBanner.hidden = false;
+  }
+  function clearError(){ els.errorBanner.hidden = true; }
+  els.errorClose.addEventListener("click", clearError);
+
+  function escapeHTML(s){
+    return String(s).replace(/[&<>"']/g, function(ch){
+      return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[ch];
+    });
+  }
+  // 《》で囲んだ部分を傍線にする
+  function markup(s){
+    return escapeHTML(s).replace(/《(.+?)》/g, '<span class="bosen">$1</span>');
+  }
+
+  // ---- 単元選び ----
+  function renderUnitGroups(){
+    els.unitGroups.innerHTML = "";
+    UNITS.forEach(function(group){
+      var wrap = document.createElement("div");
+      wrap.className = "unit-group";
+      var h3 = document.createElement("h3");
+      h3.textContent = group.chapter;
+      wrap.appendChild(h3);
+      var chips = document.createElement("div");
+      chips.className = "chips";
+      group.items.forEach(function(item){
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chip";
+        btn.textContent = item.label;
+        btn.dataset.unitId = item.id;
+        btn.addEventListener("click", function(){ selectUnit(item); });
+        chips.appendChild(btn);
+      });
+      wrap.appendChild(chips);
+      els.unitGroups.appendChild(wrap);
+    });
+  }
+  renderUnitGroups();
+
+  function selectUnit(item){
+    selectedUnit = item;
+    Array.prototype.forEach.call(els.unitGroups.querySelectorAll(".chip"), function(chip){
+      chip.classList.toggle("active", chip.dataset.unitId === item.id);
+    });
+    els.selectedUnitLabel.textContent = item.label + (item.hint ? "（" + item.hint + "）" : "");
+    els.selectedUnitCount.textContent = " 全" + poolOf(item).length + "問";
+    els.selectedUnitBox.hidden = false;
+    els.btnMakeQuiz.disabled = false;
+    els.btnViewGuide.disabled = false;
+    clearError();
+  }
+
+  if(els.btnRange){
+    els.btnRange.addEventListener("click", function(){
+      var a = parseInt(els.rangeFrom.value, 10), b = parseInt(els.rangeTo.value, 10);
+      if(isNaN(a) || isNaN(b)){ showError("はじめとおわりの番号を数字で入れてください。"); return; }
+      if(a > b){ var t = a; a = b; b = t; }
+      a = Math.max(1, a); b = Math.min(CONFIG.maxNo, b);
+      var u = rangeUnit(a, b);
+      if(!poolOf(u).length){ showError("No." + a + "〜" + b + " には問題がありません。"); return; }
+      els.rangeFrom.value = a; els.rangeTo.value = b;
+      selectUnit(u);
+      els.selectedUnitBox.scrollIntoView({ block:"nearest" });
+    });
+  }
+
+  // ---- 出題 ----
+  function shuffleArray(arr){
+    var a = arr.slice();
+    for(var i=a.length-1;i>0;i--){
+      var j = Math.floor(Math.random()*(i+1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  function shuffleChoices(q){
+    var order = shuffleArray(q.c.map(function(_, i){ return i; }));
+    var copy = {};
+    Object.keys(q).forEach(function(k){ copy[k] = q[k]; });
+    copy.c = order.map(function(i){ return q.c[i]; });
+    copy.a = order.indexOf(q.a);
+    return copy;
+  }
+
+  // 同じ語が1セットに重ならないように選ぶ（足りなければ重ねる）
+  function pickDistinct(list, n){
+    var used = {}, out = [], rest = [];
+    list.forEach(function(q){
+      if(out.length >= n){ return; }
+      if(q.w && used[q.w]){ rest.push(q); return; }
+      if(q.w) used[q.w] = true;
+      out.push(q);
+    });
+    return out.concat(rest).slice(0, n);
+  }
+
+  function pickQuizForUnit(unit){
+    var pool = poolOf(unit);
+    if(!pool.length) return null;
+    // 直近に出した問題をいったん後回しにして、同じ問題の再出現を減らす
+    var seen = store.recent[unit.id] || [];
+    var fresh = pool.filter(function(q){ return seen.indexOf(q.id) < 0; });
+    var picked;
+    if(fresh.length >= SET_SIZE){
+      picked = pickDistinct(shuffleArray(fresh), SET_SIZE);
+    } else {
+      // 未出題が足りなくなったら一巡したとみなし、記憶を流して全体から選び直す
+      picked = pickDistinct(shuffleArray(fresh).concat(
+        shuffleArray(pool.filter(function(q){ return fresh.indexOf(q) < 0; }))
+      ), SET_SIZE);
+      store.recent[unit.id] = [];
+    }
+    rememberAsked(unit.id, picked);
+    return picked.map(shuffleChoices);
+  }
+
+  function beginQuiz(questions, title){
+    quizData = questions;
+    currentIndex = 0; score = 0; results = [];
+    renderQuizDots();
+    els.quizUnit.textContent = title;
+    renderQuestion();
+    switchView("quiz");
+  }
+
+  function startQuizWith(questions, title){
+    if(!questions || !questions.length) return false;
+    isWrongReview = true;
+    beginQuiz(questions.map(shuffleChoices), title);
+    return true;
+  }
+
+  function startQuiz(){
+    clearError();
+    if(!selectedUnit) return;
+    isWrongReview = false;
+    var qs = pickQuizForUnit(selectedUnit);
+    if(!qs){
+      showError("「" + selectedUnit.label + "」の問題は準備中です。別の単元をお試しください。");
+      switchView("setup");
+      return;
+    }
+    beginQuiz(qs, CONFIG.unitWord + ": " + selectedUnit.label);
+  }
+
+  function renderQuizDots(){
+    els.quizDots.innerHTML = "";
+    quizData.forEach(function(){ els.quizDots.appendChild(document.createElement("span")); });
+    updateDots();
+  }
+  function updateDots(){
+    var dots = els.quizDots.children;
+    for(var i=0;i<dots.length;i++){
+      dots[i].className = "";
+      if(results[i] === "correct") dots[i].classList.add("done-correct");
+      else if(results[i] === "wrong") dots[i].classList.add("done-wrong");
+      else if(i === currentIndex) dots[i].classList.add("current");
+    }
+  }
+
+  function renderQuestion(){
+    var q = quizData[currentIndex];
+    els.quizCount.textContent = "問 " + (currentIndex+1) + " / " + quizData.length;
+    els.quizScore.textContent = "正解 " + score;
+    els.quizPrompt.textContent = q.p || "";
+    els.quizPrompt.hidden = !q.p;
+    els.quizQuestion.innerHTML = markup(q.q);
+    els.quizQuestion.classList.toggle("big", !!q.big);
+    els.quizSource.textContent = q.s || "";
+    els.quizSource.hidden = !q.s;
+    els.quizFeedback.hidden = true;
+    els.btnNextQuestion.hidden = true;
+    updateDots();
+
+    els.quizChoices.innerHTML = "";
+    var letters = ["A","B","C","D","E","F"];
+    q.c.forEach(function(choiceText, idx){
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "choice";
+      btn.innerHTML = '<span class="badge">' + letters[idx] + '</span><span></span>';
+      btn.querySelector("span:last-child").textContent = choiceText;
+      btn.addEventListener("click", function(){ onChoose(idx); });
+      els.quizChoices.appendChild(btn);
+    });
+  }
+
+  function onChoose(idx){
+    var q = quizData[currentIndex];
+    var buttons = els.quizChoices.querySelectorAll(".choice");
+    Array.prototype.forEach.call(buttons, function(b){ b.disabled = true; });
+
+    var isCorrect = (idx === q.a);
+    buttons[idx].classList.add(isCorrect ? "correct" : "incorrect");
+    if(!isCorrect) buttons[q.a].classList.add("correct");
+
+    if(isCorrect) score++;
+    results[currentIndex] = isCorrect ? "correct" : "wrong";
+    recordAnswer(q.id, isCorrect);
+    saveStore();
+    updateDots();
+    els.quizScore.textContent = "正解 " + score;
+
+    els.feedbackVerdict.textContent = isCorrect ? "○ 正解！" : "× 残念、不正解";
+    els.feedbackVerdict.className = "verdict " + (isCorrect ? "correct" : "incorrect");
+    els.feedbackHead.textContent = q.h || "";
+    els.feedbackHead.hidden = !q.h;
+    els.feedbackExplanation.textContent = q.e || "";
+    if(q.t){
+      els.feedbackTranslationText.innerHTML = markup(q.t);
+      els.feedbackTranslation.hidden = false;
+    } else {
+      els.feedbackTranslation.hidden = true;
+    }
+    els.feedbackMeta.textContent = q.m || "";
+    els.feedbackMeta.hidden = !q.m;
+    els.quizFeedback.hidden = false;
+    els.btnNextQuestion.hidden = false;
+    els.btnNextQuestion.textContent = (currentIndex === quizData.length-1) ? "結果を見る" : "次の問題へ";
+    // 解説とボタンが画面の外に出ないように寄せる
+    try{
+      var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      els.btnNextQuestion.scrollIntoView({ block: "end", behavior: reduceMotion ? "auto" : "smooth" });
+    }catch(e){
+      els.btnNextQuestion.scrollIntoView(false);
+    }
+  }
+
+  els.btnNextQuestion.addEventListener("click", function(){
+    if(currentIndex < quizData.length-1){
+      currentIndex++;
+      renderQuestion();
+      els.quizCount.scrollIntoView({ block: "nearest" });
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    var total = quizData.length;
+    els.resultFrac.textContent = score + "/" + total;
+    var ratio = score/total;
+    var msg;
+    if(score === total) msg = "満点です！お見事な出来栄え。もう一つ別の範囲にも挑戦してみましょう。";
+    else if(ratio >= 0.7) msg = "よくできました。間違えた問題の解説を読み返して、仕上げていきましょう。";
+    else if(ratio >= 0.4) msg = "もう少しです。解説を読み直して、同じ範囲にもう一度挑戦してみましょう。";
+    else msg = CONFIG.lowScoreMessage;
+    els.resultMessage.textContent = msg;
+
+    if(selectedUnit && !isWrongReview){
+      recordQuizFinished(selectedUnit.id, total, score);
+    } else {
+      saveStore();
+    }
+
+    var wrongCount = results.filter(function(r){ return r === "wrong"; }).length;
+    els.btnWrongOnly.hidden = (wrongCount === 0);
+    if(wrongCount) els.btnWrongOnly.textContent = "間違えた" + wrongCount + "問だけもう一度";
+    els.btnGuideFromResult.hidden = !selectedUnit || isWrongReview;
+    els.btnNewQuiz.hidden = !selectedUnit || isWrongReview;
+
+    switchView("result");
+  }
+
+  els.btnRetryQuiz.addEventListener("click", function(){
+    beginQuiz(quizData.map(shuffleChoices), els.quizUnit.textContent);
+  });
+  els.btnNewQuiz.addEventListener("click", function(){ startQuiz(); });
+  els.btnChangeUnit.addEventListener("click", function(){ clearError(); refreshWrongBoxButton(); switchView("setup"); });
+  els.btnGuideFromResult.addEventListener("click", function(){ showGuide(); });
+  els.btnGuideBack.addEventListener("click", function(){ clearError(); refreshWrongBoxButton(); switchView("setup"); });
+  els.btnGuideQuiz.addEventListener("click", function(){ startQuiz(); });
+
+  // ---- 学習ガイド / 単語一覧 ----
+  function renderMarkdown(text){
+    try{
+      if(window.marked && typeof window.marked.parse === "function") return window.marked.parse(text);
+    }catch(e){}
+    return escapeHTML(text).replace(/\n/g, "<br>");
+  }
+
+  function wordListHTML(unit){
+    var rows = WORDS.filter(function(w){
+      return unit.from ? (w.no >= unit.from && w.no <= unit.to) : w.g === unit.id;
+    });
+    if(!rows.length) return "";
+    var html = '<h2>' + escapeHTML(unit.label) + ' の語</h2>'
+             + '<div style="overflow-x:auto"><table class="word-table"><thead><tr>'
+             + '<th>' + (unit.from ? "No." : "頁") + '</th><th>語</th><th>意味</th></tr></thead><tbody>';
+    rows.forEach(function(w){
+      html += '<tr><td class="no">' + (unit.from ? w.no : "p." + w.pg) + '</td>'
+           +  '<td class="w">' + escapeHTML(w.w) + (w.k ? '<small>' + escapeHTML(w.k) + (w.h ? "・" + escapeHTML(w.h) : "") + '</small>' : "") + '</td>'
+           +  '<td>' + escapeHTML(w.m) + (unit.from && w.pg ? ' <span style="color:var(--ink-soft);font-size:.78rem">p.' + w.pg + '</span>' : "") + '</td></tr>';
+    });
+    return html + '</tbody></table></div>';
+  }
+
+  function showGuide(){
+    clearError();
+    if(!selectedUnit) return;
+    var html = GUIDES[selectedUnit.id] ? renderMarkdown(GUIDES[selectedUnit.id]) : wordListHTML(selectedUnit);
+    els.guideContent.innerHTML = html || "<p>「" + escapeHTML(selectedUnit.label) + "」のガイドは準備中です。</p>";
+    switchView("guide");
+  }
+
+  // ===================== 記録画面 =====================
+  function pct(n, d){ return d ? Math.round(n / d * 100) : 0; }
+
+  function dayKey(d){
+    function p(x){ return (x<10?"0":"") + x; }
+    return d.getFullYear() + "-" + p(d.getMonth()+1) + "-" + p(d.getDate());
+  }
+  function streakDays(){
+    if(!store.days.length) return 0;
+    var set = {};
+    store.days.forEach(function(d){ set[d] = true; });
+    var n = 0, cur = new Date();
+    if(!set[dayKey(cur)]) cur.setDate(cur.getDate() - 1);   // 今日まだなら昨日から数える
+    while(set[dayKey(cur)]){ n++; cur.setDate(cur.getDate() - 1); }
+    return n;
+  }
+
+  function calendarHTML(){
+    var now = new Date();
+    var year = now.getFullYear(), month = now.getMonth();
+    var first = new Date(year, month, 1).getDay();
+    var last = new Date(year, month+1, 0).getDate();
+    var set = {};
+    store.days.forEach(function(d){ set[d] = true; });
+    var html = '<div class="cal">';
+    ["日","月","火","水","木","金","土"].forEach(function(w){ html += '<span class="head">' + w + '</span>'; });
+    for(var i=0;i<first;i++) html += '<span></span>';
+    for(var d=1; d<=last; d++){
+      var cls = [];
+      if(set[dayKey(new Date(year, month, d))]) cls.push("on");
+      if(d === now.getDate()) cls.push("today");
+      html += '<span class="' + cls.join(" ") + '">' + d + '</span>';
+    }
+    return html + '</div>';
+  }
+
+  function renderStats(){
+    var uids = Object.keys(store.units);
+    var totalAttempts = 0, totalAsked = 0, totalCorrect = 0;
+    uids.forEach(function(u){
+      totalAttempts += store.units[u].attempts;
+      totalAsked    += store.units[u].asked;
+      totalCorrect  += store.units[u].correct;
+    });
+
+    var html = "";
+    if(!storageOK){
+      html += '<p class="stats-empty">このブラウザでは記録を保存できない設定になっています（プライベートモードなど）。'
+           +  'その場合でも、いま解いている分の「間違えた問題だけもう一度」は使えます。</p>';
+    }
+    if(!totalAttempts){
+      html += '<p class="stats-empty">まだ記録がありません。範囲を選んで10問解くと、ここに正答率と学習した日が残ります。</p>';
+      els.statsBody.innerHTML = html;
+      return;
+    }
+
+    html += '<div class="stat-grid">'
+         +  '<div class="stat-tile"><span class="k">挑戦した回数</span><span class="v">' + totalAttempts + '<small>回</small></span></div>'
+         +  '<div class="stat-tile"><span class="k">解いた問題</span><span class="v">' + totalAsked + '<small>問</small></span></div>'
+         +  '<div class="stat-tile"><span class="k">通算の正答率</span><span class="v">' + pct(totalCorrect, totalAsked) + '<small>%</small></span></div>'
+         +  '<div class="stat-tile"><span class="k">連続学習日数</span><span class="v">' + streakDays() + '<small>日</small></span></div>'
+         +  '</div>';
+
+    var wn = wrongBoxCount();
+    html += '<div class="stats-section-title">苦手ボックス</div>';
+    if(wn){
+      html += '<div class="wrongbox-line"><span>間違えたまま正解していない問題が <strong>' + wn + '問</strong> あります。</span>'
+           +  '<button type="button" class="btn btn-primary" id="btn-wrongbox-2">ここから10問解く</button></div>';
+    } else {
+      html += '<p class="stats-empty">いまは空です。間違えた問題がここにたまり、正解すると消えます。</p>';
+    }
+
+    uids.sort(function(a,b){
+      return pct(store.units[a].correct, store.units[a].asked) - pct(store.units[b].correct, store.units[b].asked);
+    });
+    html += '<div class="stats-section-title">' + CONFIG.unitWord + 'ごとの成績（正答率の低い順）</div>';
+    html += '<div style="overflow-x:auto"><table class="stat-table"><thead><tr>'
+         +  '<th>' + CONFIG.unitWord + '</th><th class="num">挑戦</th><th class="num">正答率</th><th style="width:90px"></th><th class="num">最終</th>'
+         +  '</tr></thead><tbody>';
+    uids.forEach(function(uid){
+      var u = store.units[uid];
+      var r = pct(u.correct, u.asked);
+      var cls = r < 50 ? "low" : (r < 80 ? "mid" : "");
+      html += '<tr><td>' + escapeHTML(unitLabelOf(uid)) + '</td>'
+           +  '<td class="num">' + u.attempts + '回</td>'
+           +  '<td class="num">' + r + '%</td>'
+           +  '<td><span class="rate-bar"><i class="' + cls + '" style="width:' + r + '%"></i></span></td>'
+           +  '<td class="num">' + (u.last || "-").slice(5).replace("-", "/") + '</td></tr>';
+    });
+    html += '</tbody></table></div>';
+    html += '<div class="stats-section-title">今月の学習した日</div>' + calendarHTML();
+
+    els.statsBody.innerHTML = html;
+    var btn2 = document.getElementById("btn-wrongbox-2");
+    if(btn2) btn2.addEventListener("click", openWrongBox);
+  }
+
+  function openWrongBox(){
+    clearError();
+    var qs = wrongBoxQuestions(SET_SIZE);
+    if(!qs.length){
+      showError("苦手ボックスは空です。まずは範囲を選んで挑戦してみましょう。");
+      switchView("setup");
+      return;
+    }
+    startQuizWith(qs, "苦手ボックス(" + qs.length + "問)");
+  }
+
+  function showStats(){ clearError(); renderStats(); switchView("stats"); }
+
+  els.btnStats.addEventListener("click", showStats);
+  els.btnStatsFromResult.addEventListener("click", showStats);
+  els.btnStatsBack.addEventListener("click", function(){ clearError(); refreshWrongBoxButton(); switchView("setup"); });
+  els.btnWrongbox.addEventListener("click", openWrongBox);
+
+  els.btnStatsReset.addEventListener("click", function(){
+    if(!window.confirm("これまでの記録と苦手ボックスをすべて消します。よろしいですか？")) return;
+    store = emptyStore();
+    try{ window.localStorage.removeItem(CONFIG.storeKey); }catch(e){}
+    renderStats();
+  });
+
+  els.btnWrongOnly.addEventListener("click", function(){
+    var wrong = quizData.filter(function(_, i){ return results[i] === "wrong"; });
+    if(!wrong.length) return;
+    startQuizWith(wrong, "間違えた問題の解き直し(" + wrong.length + "問)");
+  });
+
+  function refreshWrongBoxButton(){
+    var n = wrongBoxCount();
+    els.btnWrongbox.textContent = n ? ("苦手ボックスから10問(" + n + "問たまっています)") : "苦手ボックスから10問";
+    els.btnWrongbox.disabled = (n === 0);
+  }
+  refreshWrongBoxButton();
+
+  els.btnMakeQuiz.addEventListener("click", function(){ startQuiz(); });
+  els.btnViewGuide.addEventListener("click", function(){ showGuide(); });
+})();
+</script>
+</body>
+</html>

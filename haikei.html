@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="諸子百家・中国史・漢詩のきまり・故事成語の出典を読み物としてまとめたページ。漢文を読む前提になる知識を、順番に押さえられる。">
+<title>渡邊梢太の漢文 背景知識</title>
+<style>
+  :root{
+    --ai:#2c3e66;
+    --ai-deep:#1d2c4d;
+    --yamabuki:#c98a1c;
+    --yamabuki-deep:#a06d13;
+    --wakatake:#3f8a63;
+    --wakatake-bg:#e6f0e8;
+    --kobai:#b8483f;
+    --kobai-bg:#f6e6e2;
+    --bg:#f4efe1;
+    --surface:#fffdf8;
+    --surface-2:#eae1c9;
+    --ink:#2a251c;
+    --ink-soft:#6d6553;
+    --line:#d9cca7;
+    --shadow:rgba(42,37,28,0.14);
+    --focus:#8a5a1f;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ai:#8fa3d6;
+      --ai-deep:#c2cfec;
+      --yamabuki:#e0ac47;
+      --yamabuki-deep:#f0c877;
+      --wakatake:#7fc39e;
+      --wakatake-bg:#1c3329;
+      --kobai:#e2938c;
+      --kobai-bg:#3a2320;
+      --bg:#141726;
+      --surface:#1c2038;
+      --surface-2:#262b4a;
+      --ink:#ece5d3;
+      --ink-soft:#a9a08b;
+      --line:#38406a;
+      --shadow:rgba(0,0,0,0.45);
+      --focus:#e0ac47;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ai:#8fa3d6;
+    --ai-deep:#c2cfec;
+    --yamabuki:#e0ac47;
+    --yamabuki-deep:#f0c877;
+    --wakatake:#7fc39e;
+    --wakatake-bg:#1c3329;
+    --kobai:#e2938c;
+    --kobai-bg:#3a2320;
+    --bg:#141726;
+    --surface:#1c2038;
+    --surface-2:#262b4a;
+    --ink:#ece5d3;
+    --ink-soft:#a9a08b;
+    --line:#38406a;
+    --shadow:rgba(0,0,0,0.45);
+    --focus:#e0ac47;
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Zen Maru Gothic','Hiragino Maru Gothic ProN',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .stage{
+    max-width:680px;
+    margin:0 auto;
+    padding:28px 18px 60px;
+    position:relative;
+  }
+  .stage::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image:radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+    background-size:16px 16px;
+    opacity:.22;
+    mix-blend-mode:multiply;
+    pointer-events:none;
+    z-index:0;
+  }
+  :root:not([data-theme="light"]) .stage::before{ mix-blend-mode:screen; opacity:.10; }
+  :root[data-theme="dark"] .stage::before{ mix-blend-mode:screen; opacity:.10; }
+
+  .stage > *{ position:relative; z-index:1; }
+
+  .rod{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:0 auto;
+  }
+  .rod::before,.rod::after{
+    content:'';
+    flex:1;
+    height:5px;
+    border-radius:3px;
+    background:var(--ai-deep);
+  }
+  .rod .knob{
+    width:14px; height:14px; border-radius:50%;
+    background:var(--yamabuki);
+    box-shadow:0 0 0 2px var(--surface);
+    flex:none;
+  }
+
+  header.masthead{ text-align:center; padding:6px 0 22px; }
+  header.masthead .rod{ margin-bottom:16px; }
+  h1{
+    font-family:'Shippori Mincho', serif;
+    font-weight:800;
+    font-size:clamp(1.6rem, 1.1rem + 3vw, 2.3rem);
+    letter-spacing:.03em;
+    margin:0 0 8px;
+    text-wrap:balance;
+  }
+  header.masthead p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:.92rem;
+    line-height:1.75;
+  }
+
+  section{ display:block; }
+  section[hidden]{ display:none !important; }
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:22px 20px;
+    box-shadow:0 3px 14px var(--shadow);
+  }
+  .card + .card{ margin-top:16px; }
+
+  .steps{
+    list-style:none;
+    margin:0 0 20px;
+    padding:0;
+    display:grid;
+    gap:8px;
+    font-size:.9rem;
+    color:var(--ink-soft);
+  }
+  .steps li{ display:flex; gap:10px; align-items:baseline; }
+  .steps .num{
+    font-family:'Shippori Mincho',serif;
+    color:var(--yamabuki-deep);
+    font-weight:700;
+    flex:none;
+    width:1.4em;
+  }
+
+  label.field-label{
+    display:block;
+    font-weight:700;
+    margin-bottom:4px;
+    font-size:.95rem;
+  }
+  .field-hint{
+    font-size:.8rem;
+    color:var(--ink-soft);
+    margin:0 0 10px;
+  }
+
+  .unit-group{ margin-bottom:18px; }
+  .unit-group:last-child{ margin-bottom:0; }
+  .unit-group h3{
+    font-family:'Shippori Mincho',serif;
+    font-size:.95rem;
+    font-weight:700;
+    color:var(--ai);
+    margin:0 0 8px;
+    padding-bottom:6px;
+    border-bottom:1px solid var(--line);
+  }
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .chip{
+    border:1.5px solid var(--line);
+    background:var(--bg);
+    color:var(--ink);
+    border-radius:999px;
+    padding:8px 14px;
+    font-size:.84rem;
+    line-height:1.4;
+    cursor:pointer;
+    font-family:'Zen Maru Gothic',sans-serif;
+    text-align:left;
+  }
+  .chip:hover{ border-color:var(--ai); }
+  .chip.active{ background:var(--ai); color:var(--surface); border-color:var(--ai); font-weight:700; }
+
+  .selected-unit-box{
+    margin-top:18px;
+    padding:12px 14px;
+    background:var(--surface-2);
+    border-radius:8px;
+    font-size:.88rem;
+  }
+  .selected-unit-box strong{
+    font-family:'Shippori Mincho',serif;
+    color:var(--ai);
+  }
+
+  textarea:focus-visible, button:focus-visible, .choice:focus-visible, .chip:focus-visible, input:focus-visible{
+    outline:3px solid var(--focus);
+    outline-offset:2px;
+  }
+
+  .actions{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:20px;
+  }
+  button.btn{
+    font-family:'Zen Maru Gothic',sans-serif;
+    font-weight:700;
+    font-size:1.02rem;
+    padding:15px 18px;
+    border-radius:10px;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .12s ease, filter .12s ease;
+  }
+  @media (prefers-reduced-motion: reduce){ button.btn{ transition:none; } }
+  button.btn:active{ transform:translateY(1px); }
+  button.btn:disabled{ opacity:.5; cursor:not-allowed; transform:none; }
+  .btn-primary{
+    background:var(--yamabuki);
+    color:#2a1c04;
+    box-shadow:0 3px 0 var(--yamabuki-deep);
+  }
+  :root:not([data-theme="light"]) .btn-primary{ color:#241a02; }
+  :root[data-theme="dark"] .btn-primary{ color:#241a02; }
+  .btn-primary:hover:not(:disabled){ filter:brightness(1.04); }
+  .btn-secondary{
+    background:transparent;
+    color:var(--ai);
+    border-color:var(--ai);
+  }
+  .btn-secondary:hover:not(:disabled){ background:var(--surface-2); }
+  .btn-ghost{
+    background:transparent;
+    color:var(--ink-soft);
+    border:none;
+    text-decoration:underline;
+    padding:8px;
+    font-size:.9rem;
+  }
+
+  #error-banner[hidden]{ display:none !important; }
+  #error-banner{
+    background:var(--kobai-bg);
+    border:1px solid var(--kobai);
+    color:var(--kobai);
+    border-radius:8px;
+    padding:12px 14px;
+    font-size:.88rem;
+    margin-bottom:14px;
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    align-items:flex-start;
+  }
+  #error-banner button{
+    background:none; border:none; color:inherit; font-weight:700; cursor:pointer; font-size:1rem; line-height:1;
+  }
+
+  .quiz-progress{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:6px;
+    font-family:'Shippori Mincho',serif;
+  }
+  .quiz-progress .count{ font-size:1.1rem; font-weight:700; font-variant-numeric:tabular-nums; }
+  .quiz-progress .score{ font-size:.85rem; color:var(--ink-soft); font-family:'Zen Maru Gothic',sans-serif; }
+  .quiz-unit{
+    font-size:.8rem;
+    color:var(--ink-soft);
+    margin:0 0 14px;
+  }
+  .passage-box{
+    background:var(--surface-2);
+    border-radius:8px;
+    padding:14px 16px;
+    margin:0 0 18px;
+  }
+  .passage-box .label{
+    font-weight:700;
+    color:var(--ai);
+    display:block;
+    margin-bottom:6px;
+    font-size:.78rem;
+    letter-spacing:.04em;
+  }
+  .passage-box p{
+    font-family:'Shippori Mincho',serif;
+    font-size:.98rem;
+    line-height:1.9;
+    margin:0;
+    white-space:pre-wrap;
+  }
+  .dots{ display:flex; gap:5px; margin-bottom:18px; flex-wrap:wrap; }
+  .dots span{ width:9px; height:9px; border-radius:50%; background:var(--line); }
+  .dots span.done-correct{ background:var(--wakatake); }
+  .dots span.done-wrong{ background:var(--kobai); }
+  .dots span.current{ background:var(--yamabuki); }
+
+  .question-text{
+    font-family:'Shippori Mincho',serif;
+    font-size:clamp(1.05rem, .9rem + 1vw, 1.3rem);
+    line-height:1.85;
+    margin:0 0 20px;
+    text-wrap:balance;
+  }
+
+  .choices{ display:grid; gap:10px; }
+  .choice{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-align:left;
+    width:100%;
+    background:var(--bg);
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:14px 16px;
+    font-family:'Zen Maru Gothic',sans-serif;
+    font-size:1rem;
+    line-height:1.6;
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .choice:hover:not(:disabled){ border-color:var(--ai); }
+  .choice .badge{
+    flex:none;
+    width:28px; height:28px;
+    border-radius:50%;
+    background:var(--surface-2);
+    color:var(--ink-soft);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:.85rem;
+    font-family:'Shippori Mincho',serif;
+  }
+  .choice:disabled{ cursor:default; }
+  .choice.correct{ background:var(--wakatake-bg); border-color:var(--wakatake); }
+  .choice.correct .badge{ background:var(--wakatake); color:#fff; }
+  .choice.incorrect{ background:var(--kobai-bg); border-color:var(--kobai); }
+  .choice.incorrect .badge{ background:var(--kobai); color:#fff; }
+
+  .feedback{
+    margin-top:18px;
+    padding-top:16px;
+    border-top:1px dashed var(--line);
+  }
+  .feedback .verdict{
+    font-family:'Shippori Mincho',serif;
+    font-weight:800;
+    font-size:1.15rem;
+    margin:0 0 10px;
+  }
+  .feedback .verdict.correct{ color:var(--wakatake); }
+  .feedback .verdict.incorrect{ color:var(--kobai); }
+  .feedback .explanation{ font-size:.95rem; line-height:1.8; margin:0 0 12px; }
+  .feedback .translation{
+    background:var(--surface-2);
+    border-radius:8px;
+    padding:12px 14px;
+    font-size:.9rem;
+    line-height:1.8;
+  }
+  .feedback .translation .label{
+    font-weight:700;
+    color:var(--ai);
+    display:block;
+    margin-bottom:4px;
+    font-size:.78rem;
+    letter-spacing:.04em;
+  }
+
+  .result-head{ text-align:center; padding:8px 0 22px; }
+  .stamp{
+    width:118px; height:118px;
+    margin:0 auto 16px;
+    border-radius:50%;
+    border:3px solid var(--kobai);
+    box-shadow:inset 0 0 0 3px var(--surface), 0 3px 10px var(--shadow);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    transform:rotate(-5deg);
+    color:var(--kobai);
+    font-family:'Shippori Mincho',serif;
+  }
+  .stamp .frac{ font-size:1.7rem; font-weight:800; line-height:1; font-variant-numeric:tabular-nums; }
+  .stamp .of{ font-size:.7rem; margin-top:2px; }
+  .result-message{ font-size:.98rem; line-height:1.8; color:var(--ink-soft); max-width:32em; margin:0 auto; }
+
+  .guide-content{
+    font-size:.98rem;
+    line-height:1.95;
+  }
+  .guide-content h1,.guide-content h2,.guide-content h3{
+    font-family:'Shippori Mincho',serif;
+    margin:1.2em 0 .5em;
+    line-height:1.5;
+  }
+  .guide-content h1{ font-size:1.25rem; }
+  .guide-content h2{ font-size:1.12rem; }
+  .guide-content h3{ font-size:1.02rem; }
+  .guide-content p{ margin:0 0 .9em; }
+  .guide-content ul,.guide-content ol{ margin:0 0 1em; padding-left:1.4em; }
+  .guide-content li{ margin-bottom:.4em; }
+  .guide-content strong{ color:var(--ai); }
+  .guide-content code{ background:var(--surface-2); padding:.1em .3em; border-radius:4px; }
+  .thinking{ color:var(--ink-soft); }
+
+  footer{
+    text-align:center;
+    font-size:.75rem;
+    color:var(--ink-soft);
+    margin-top:34px;
+    line-height:1.7;
+  }
+
+
+/* ==== 記録機能 追加分 ==== */
+.sub-actions{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+.stat-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:12px; margin-bottom:22px; }
+.stat-tile{ border:1px solid var(--line); border-radius:10px; padding:12px 14px; background:var(--bg); }
+.stat-tile .k{ display:block; font-size:.74rem; color:var(--ink-soft); letter-spacing:.06em; }
+.stat-tile .v{ display:block; font-size:1.5rem; font-weight:700; color:var(--ai); font-variant-numeric:tabular-nums; margin-top:2px; }
+.stat-tile .v small{ font-size:.8rem; font-weight:400; color:var(--ink-soft); margin-left:2px; }
+.stats-empty{ color:var(--ink-soft); padding:18px 0; }
+.stat-table{ width:100%; border-collapse:collapse; font-size:.9rem; }
+.stat-table th{ text-align:left; font-size:.72rem; letter-spacing:.08em; color:var(--ink-soft); border-bottom:1px solid var(--line); padding:6px 8px; font-weight:700; }
+.stat-table td{ border-bottom:1px solid var(--line); padding:8px; vertical-align:middle; }
+.stat-table td.num{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.rate-bar{ display:block; position:relative; height:8px; border-radius:4px; background:var(--line); min-width:70px; }
+.rate-bar i{ position:absolute; left:0; top:0; bottom:0; border-radius:4px; background:var(--wakatake); }
+.rate-bar i.low{ background:var(--kobai); }
+.rate-bar i.mid{ background:var(--yamabuki); }
+.cal{ display:grid; grid-template-columns:repeat(7,1fr); gap:4px; max-width:330px; }
+.cal span{ aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:.74rem;
+  border-radius:6px; color:var(--ink-soft); font-variant-numeric:tabular-nums; }
+.cal span.head{ color:var(--ink-soft); font-size:.68rem; aspect-ratio:auto; padding-bottom:2px; }
+.cal span.on{ background:var(--wakatake); color:#fff; font-weight:700; }
+.cal span.today{ outline:2px solid var(--yamabuki); outline-offset:-2px; }
+.stats-section-title{ font-size:.95rem; font-weight:700; margin:26px 0 10px; color:var(--ai); }
+.wrongbox-line{ display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:6px; }
+.privacy-note{ font-size:.76rem; color:var(--ink-soft); margin-top:26px; line-height:1.7; }
+
+/* ==== 狭い画面（スマホ）の調整 ==== */
+@media (max-width:400px){
+  h1{ font-size:1.5rem; letter-spacing:.01em; }
+  .stage{ padding:20px 14px 48px; }
+  .card{ padding:18px 15px; }
+  .chip{ font-size:.82rem; padding:8px 12px; }
+  .stat-grid{ grid-template-columns:repeat(2,1fr); }
+}
+#btn-next-question{ scroll-margin-bottom:24px; }
+
+/* ==== 道場の切り替え ==== */
+nav.sister{ display:flex; justify-content:center; gap:6px; flex-wrap:wrap; margin:0 0 18px; }
+nav.sister a{ font-size:.82rem; padding:6px 14px; border-radius:999px; border:1px solid var(--line);
+  color:var(--ink-soft); text-decoration:none; background:var(--surface); }
+nav.sister a:hover{ border-color:var(--ai); color:var(--ai); }
+nav.sister a[aria-current]{ background:var(--ai); border-color:var(--ai); color:var(--surface); font-weight:700; }
+
+
+.wraph{max-width:820px;margin:0 auto;padding:28px 20px 64px}
+.toc{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:0 0 30px}
+.toc h2{font-size:.85rem;letter-spacing:.1em;color:var(--ink-soft);margin:0 0 10px;font-family:var(--sans,inherit)}
+.toc ol{margin:0;padding-left:1.4em}
+.toc li{margin:5px 0}
+.toc a{color:var(--ai);text-decoration:none}
+.toc a:hover{text-decoration:underline}
+.chap{margin:0 0 46px;scroll-margin-top:16px}
+.chap>h2:first-child{font-size:1.5rem;border-bottom:2px solid var(--ai);padding-bottom:8px;margin:0 0 18px}
+.chap h2{font-family:'Shippori Mincho',serif;font-size:1.25rem;margin:34px 0 12px}
+.chap h3{font-size:1.02rem;margin:22px 0 8px;color:var(--ai)}
+.chap p{line-height:1.95;margin:0 0 1em}
+.chap ul{line-height:1.9;padding-left:1.3em}
+.chap table{width:100%;border-collapse:collapse;font-size:.92rem;line-height:1.7;margin:0 0 1.2em}
+.chap th,.chap td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+.chap th{background:var(--surface-2,rgba(0,0,0,.04));font-size:.82rem;color:var(--ink-soft)}
+.chap blockquote{margin:0 0 1.2em;padding:2px 0 2px 16px;border-left:3px solid var(--yamabuki,#B8860B);
+  color:var(--ink-soft);font-family:'Shippori Mincho',serif}
+.chap a{color:var(--ai)}
+.ex{margin:0 0 1.2em;padding-left:16px;border-left:2px solid var(--shu,#B0442C);font-size:.92rem;
+  color:var(--ink-soft);line-height:1.9}
+.ex-l{margin:0;display:grid;grid-template-columns:5.4em 1fr;gap:0 8px}
+.ex-l b{font-size:.72rem;letter-spacing:.08em;color:var(--ink-soft);font-weight:500;padding-top:.4em}
+.ex-l:first-child{font-family:'Shippori Mincho',serif;font-size:1.06rem;color:var(--ink);letter-spacing:.06em}
+.kt{font-size:.5em;line-height:1;vertical-align:sub;color:var(--shu,#B0442C);margin:0 .08em}
+.kh{font-size:.6em;color:var(--ink-soft);vertical-align:middle;margin:0 -.1em}
+.backtop{display:block;text-align:right;font-size:.8rem;color:var(--ink-soft);text-decoration:none;margin-top:-30px}
+nav.sister{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:0 0 22px}
+nav.sister a{font-size:.82rem;padding:6px 14px;border-radius:999px;border:1px solid var(--line);
+  color:var(--ink-soft);text-decoration:none;background:var(--surface)}
+nav.sister a[aria-current]{background:var(--ai);border-color:var(--ai);color:var(--surface);font-weight:700}
+@media (max-width:560px){.ex-l{grid-template-columns:4.6em 1fr}}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Maru+Gothic:wght@400;500;700&display=swap">
+</head>
+<body>
+<div class="stage"><div class="wraph" id="top">
+  <header class="masthead">
+    <div class="rod"><span class="knob"></span><span class="knob"></span></div>
+    <h1><span style="display:inline-block">渡邊梢太の</span><span style="display:inline-block">漢文 背景知識</span></h1>
+    <p>漢文を読む前に知っておきたいことを、順番にまとめました。青い語を押すと辞典のその項目が開きます。</p>
+    <div class="rod" style="margin-top:16px"><span class="knob"></span><span class="knob"></span></div>
+  </header>
+  <nav class="sister" aria-label="道場の切り替え"><a href="./">漢文辞典</a><a href="kukei.html">句形道場</a><a href="haikei.html" aria-current="page">背景知識</a></nav>
+  <nav class="toc" aria-label="目次"><h2>目次</h2><ol><li><a href="#shiso">諸子百家 — 何を争っていたか</a></li><li><a href="#rekishi">中国史の流れ — 漢文が書かれた場所</a></li><li><a href="#kanshi">漢詩のきまり — 形から入る</a></li><li><a href="#kojiseigo">故事成語 — どの本から来たか</a></li><li><a href="#yomu">漢文の読み方 — 話の型と設問の急所</a></li></ol></nav>
+<section class="chap" id="shiso"><h2>諸子百家 — 何を争っていたか</h2>
+<p>漢文の評論的な文章は、たいてい<b>どう生きるか・どう治めるか</b>をめぐる議論です。書いた人がどの学派に立っているかが分かると、主張の向きが先に読めます。</p>
+<h2>舞台は乱世</h2>
+<p>周の王室が衰え、諸侯が争った春秋戦国時代。国は生き残るために、家柄によらず<b>使える人材</b>を求めました。そこで各地の思想家が「私の考えで国は治まる」と説いて回ります。これが<a href="./?w=%E8%AB%B8%E5%AD%90%E7%99%BE%E5%AE%B6">諸子百家</a>です。</p>
+<p>議論の的はいつも同じでした。<b>人はもともと善いのか悪いのか。人を動かすのは徳か、法か、それとも何もしないことか。</b></p>
+<h2>儒家 — 徳で人を整える</h2>
+<p><a href="./?w=%E5%AD%94%E5%AD%90">孔子</a>は<a href="./?w=%E4%BB%81">仁</a>（人を思いやる心）と<a href="./?w=%E7%A4%BC">礼</a>（人との関係を整える形）を説きました。政治も、力ではなく徳で行うべきだと考えます。</p>
+<div class="ex"><p class="ex-l"><b>白文</b><span>為政以徳、譬如北辰。</span></p><p class="ex-l"><b>書き下し</b><span>政を為すに徳を以てすれば、譬へば北辰のごとし。</span></p><p class="ex-l ex-t"><b>訳</b><span>徳で政治を行えば、北極星のように人が慕い集まる。</span></p></div>
+<p><a href="./?w=%E5%AD%9F%E5%AD%90">孟子</a>はこれを受けて<a href="./?w=%E6%80%A7%E5%96%84%E8%AA%AC">性善説</a>を唱えました。人は生まれつき善の芽（四端）を持つ、だから育てればよい、と考えます。同じ儒家でも<a href="./?w=%E8%8D%80%E5%AD%90">荀子</a>は<a href="./?w=%E6%80%A7%E6%82%AA%E8%AA%AC">性悪説</a>に立ち、人の欲は放っておけば争いになるから、礼と教育で正すのだと説きました。</p>
+<p><b>同じ学派の中でも、人間観は正反対になりうる。</b> ここは設問になりやすいところです。</p>
+<h2>道家 — 手を加えない</h2>
+<p><a href="./?w=%E8%80%81%E5%AD%90">老子</a>と<a href="./?w=%E8%8D%98%E5%AD%90">荘子</a>の道家は、儒家の説く礼や仁を「人のこしらえもの」と見ます。よい行いを決めるから、そこから外れる者が出る。だから何も足さずに自然のままにある（<a href="./?w=%E7%84%A1%E7%82%BA%E8%87%AA%E7%84%B6">無為自然</a>）のがよい、という立場です。</p>
+<div class="ex"><p class="ex-l"><b>白文</b><span>上善若<span class="kt">レ</span>水。</span></p><p class="ex-l"><b>書き下し</b><span>上善は水のごとし。</span></p><p class="ex-l ex-t"><b>訳</b><span>最上の善は水のようなものだ。</span></p></div>
+<p>水は形を争わず低いところへ流れます。<a href="./?w=%E8%8D%98%E5%AD%90">荘子</a>は寓話でこの考えを語りました。蝶になった夢から覚めて、自分が蝶の夢を見たのか、蝶が自分の夢を見ているのか分からない、という<a href="./?w=%E8%8D%98%E5%AD%90">荘子</a>の話が有名です。</p>
+<h2>墨家 — 分けへだてなく愛する</h2>
+<p><a href="./?w=%E5%A2%A8%E5%AE%B6">墨家</a>は、儒家の愛が身内から順に薄くなる（別愛）ことを批判し、<b>すべての人を等しく愛する兼愛</b>と、侵略戦争の否定（非攻）を説きました。実際に守城の技術を持ち、攻められる側に味方したことから、「<a href="./?w=%E5%A2%A8%E5%AE%88">墨守</a>」という語が生まれています。</p>
+<h2>法家 — 法で国を動かす</h2>
+<p><a href="./?w=%E6%B3%95%E5%AE%B6">法家</a>は、徳や情に頼らず、<b>誰にでも同じように及ぶ法</b>で国を治めよと説きます。韓非子の言う法・術・勢がその柱です。</p>
+<div class="ex"><p class="ex-l"><b>白文</b><span>法不<span class="kt">レ</span>阿<span class="kt">レ</span>貴。</span></p><p class="ex-l"><b>書き下し</b><span>法は貴きに阿らず。</span></p><p class="ex-l ex-t"><b>訳</b><span>法は身分の高い者にへつらわない。</span></p></div>
+<p>この考えを採り入れたのが秦で、中国を初めて統一しました。ただし厳しすぎる法は人心を失い、秦は二代で滅びます。<b>法家は強いが短い、儒家は遅いが長い。</b> 漢以後、国の学問は儒家に落ち着きました。</p>
+<h2>兵家 — 戦わずに勝つ</h2>
+<p><a href="./?w=%E5%85%B5%E5%AE%B6">兵家</a>の孫子は、戦いを勇ましさではなく計算として捉えました。</p>
+<div class="ex"><p class="ex-l"><b>白文</b><span>知<span class="kt">レ</span>彼知<span class="kt">レ</span>己、百戦不<span class="kt">レ</span>殆。</span></p><p class="ex-l"><b>書き下し</b><span>彼を知り己を知れば、百戦殆ふからず。</span></p><p class="ex-l ex-t"><b>訳</b><span>相手を知り自分を知れば、何度戦っても危うくない。</span></p></div>
+<h2>読むときの手がかり</h2>
+<ul><li>「仁」「礼」「君子」が出てきたら<b>儒家</b></li><li>「道」「自然」「無為」「無用の用」が出てきたら<b>道家</b></li><li>「法」「賞罰」「君主の術」が出てきたら<b>法家</b></li><li>話が<b>寓話（動物やたとえ話）</b>で進むなら、道家か戦国策系の説話</li></ul>
+<p>学派が分かると、結論の向きが読めます。儒家なら「徳を修めよ」、道家なら「作為をやめよ」、法家なら「制度を整えよ」に落ち着きます。</p>
+<a class="backtop" href="#top">↑ 目次へ</a></section>
+<section class="chap" id="rekishi"><h2>中国史の流れ — 漢文が書かれた場所</h2>
+<p>漢文に出てくる人物は、たいてい<b>官人</b>です。官職につき、意見を述べ、うまくいかなければ左遷される。この仕組みが分かると、詩文の嘆きの意味が変わって見えます。</p>
+<h2>大きな流れ</h2>
+<table><thead><tr><th>時代</th><th>おおよその年代</th><th>漢文で出てくるもの</th></tr></thead><tbody><tr><td>周</td><td>前11世紀〜</td><td><a href="./?w=%E5%B0%81%E5%BB%BA%E3%83%BB%E9%83%A1%E7%9C%8C">封建・郡県</a>の封建、礼の制度</td></tr><tr><td>春秋戦国</td><td>前770〜前221</td><td><a href="./?w=%E8%AB%B8%E5%AD%90%E7%99%BE%E5%AE%B6">諸子百家</a>、<a href="./?w=%E6%88%A6%E5%9B%BD%E7%AD%96">戦国策</a>の遊説家</td></tr><tr><td>秦</td><td>前221〜前206</td><td><a href="./?w=%E7%A7%A6%E3%81%AE%E5%A7%8B%E7%9A%87%E5%B8%9D">秦の始皇帝</a>、郡県制、焚書坑儒</td></tr><tr><td>漢</td><td>前202〜後220</td><td><a href="./?w=%E5%8F%B2%E8%A8%98">史記</a>、儒学の国教化、<a href="./?w=%E9%A0%85%E7%BE%BD%E3%81%A8%E5%8A%89%E9%82%A6">項羽と劉邦</a></td></tr><tr><td>三国・六朝</td><td>220〜589</td><td><a href="./?w=%E9%99%B6%E6%B7%B5%E6%98%8E">陶淵明</a>、隠逸の文学</td></tr><tr><td>隋・唐</td><td>581〜907</td><td><a href="./?w=%E7%A7%91%E6%8C%99">科挙</a>、<a href="./?w=%E6%9D%8E%E7%99%BD">李白</a>・<a href="./?w=%E6%9D%9C%E7%94%AB">杜甫</a>・<a href="./?w=%E7%99%BD%E5%B1%85%E6%98%93">白居易</a></td></tr><tr><td>宋以後</td><td>960〜</td><td>朱子学、資治通鑑</td></tr></tbody></table>
+<h2>天命と易姓革命</h2>
+<p>中国では、王は<b>天から命を受けて</b>民を治めると考えられました。徳を失えば天命は他へ移る。これが<a href="./?w=%E6%98%93%E5%A7%93%E9%9D%A9%E5%91%BD">易姓革命</a>です。だから「暴君を討つのは君殺しではない」という議論が成り立ちます。</p>
+<div class="ex"><p class="ex-l"><b>白文</b><span>聞<span class="kt">三</span>誅<span class="kt">二</span>一夫紂<span class="kt">一</span>矣、未<span class="kt">レ</span>聞<span class="kt">レ</span>弑<span class="kt">レ</span>君也。</span></p><p class="ex-l"><b>書き下し</b><span>一夫紂を誅するを聞く、未だ君を弑するを聞かざるなり。</span></p><p class="ex-l ex-t"><b>訳</b><span>暴君紂という一人の男を討ったとは聞くが、君主を殺したとは聞かない。</span></p></div>
+<h2>身分と官職</h2>
+<p><a href="./?w=%E5%A4%A9%E5%AD%90%E3%83%BB%E8%AB%B8%E4%BE%AF%E3%83%BB%E5%A4%A7%E5%A4%AB%E3%83%BB%E5%A3%AB">天子・諸侯・大夫・士</a>が周代の序列で、その下に庶人がいます。漢文では、この序列によって<b>死を表す語まで変わります</b>。天子は崩、諸侯は薨、大夫は<a href="./?w=%E5%8D%92">卒</a>、士は不禄。</p>
+<p>官職では、中央の<a href="./?w=%E4%B8%9E%E7%9B%B8%EF%BC%88%E5%AE%B0%E7%9B%B8%EF%BC%89">丞相（宰相）</a>、地方の<a href="./?w=%E5%A4%AA%E5%AE%88%E3%83%BB%E5%88%BA%E5%8F%B2%E3%83%BB%E7%9C%8C%E4%BB%A4">太守・刺史・県令</a>をおさえておけば足ります。無官の身は<a href="./?w=%E5%B8%83%E8%A1%A3">布衣</a>。有力者に養われる人々は<a href="./?w=%E9%A3%9F%E5%AE%A2">食客</a>と呼ばれ、戦国時代の話に何度も出てきます。</p>
+<h2>科挙と左遷</h2>
+<p><a href="./?w=%E7%A7%91%E6%8C%99">科挙</a>は、家柄ではなく試験で官僚を選ぶ制度です。詩文と経書の力が問われたので、<b>詩を作る力がそのまま出世にかかわりました</b>。難関を突破することを「<a href="./?w=%E7%99%BB%E7%AB%9C%E9%96%80">登竜門</a>」といいます。</p>
+<p>いっぽう、意見が容れられなければ地方へ飛ばされます。これが<a href="./?w=%E5%B7%A6%E9%81%B7">左遷</a>です。中国では右を上位としたので、左へ動かすことが降格を意味しました。</p>
+<p><b>漢詩に「都から遠い」「故郷が恋しい」「友と別れる」が多いのは、この人事のためです。</b> 単なる感傷ではなく、政治に敗れた者の嘆きとして読むと、意味がはっきりします。</p>
+<h2>隠れるという選択</h2>
+<p>官をやめて田園に帰る生き方も、立派な選択とされました（<a href="./?w=%E9%9A%A0%E9%80%B8">隠逸</a>）。</p>
+<div class="ex"><p class="ex-l"><b>白文</b><span>採<span class="kt">レ</span>菊東籬下、悠然見<span class="kt">二</span>南山<span class="kt">一</span>。</span></p><p class="ex-l"><b>書き下し</b><span>菊を采る東籬の下、悠然として南山を見る。</span></p><p class="ex-l ex-t"><b>訳</b><span>東の垣根で菊を摘み、ゆったりと南山を眺める。</span></p></div>
+<p><a href="./?w=%E9%99%B6%E6%B7%B5%E6%98%8E">陶淵明</a>の「帰去来辞」「桃花源記」は、この生き方を示した代表作です。</p>
+<a class="backtop" href="#top">↑ 目次へ</a></section>
+<section class="chap" id="kanshi"><h2>漢詩のきまり — 形から入る</h2>
+<p>漢詩の設問は、<b>まず形式を見分ける</b>ところから始まります。形式が分かれば、押韻の位置も対句の場所も決まります。</p>
+<h2>形式の見分け方</h2>
+<p>句の数と、一句の字数を数えるだけです。</p>
+<table><thead><tr><th>句数＼字数</th><th>五字</th><th>七字</th></tr></thead><tbody><tr><td>四句</td><td>五言絶句</td><td>七言絶句</td></tr><tr><td>八句</td><td>五言律詩</td><td>七言律詩</td></tr><tr><td>それ以外</td><td>五言古詩</td><td>七言古詩</td></tr></tbody></table>
+<p>唐代に形が整った<a href="./?w=%E7%B5%B6%E5%8F%A5">絶句</a>と<a href="./?w=%E5%BE%8B%E8%A9%A9">律詩</a>を<b>近体詩</b>、それより前の自由な形を<b>古体詩</b>と呼びます（<a href="./?w=%E8%BF%91%E4%BD%93%E8%A9%A9%E3%83%BB%E5%8F%A4%E4%BD%93%E8%A9%A9">近体詩・古体詩</a>）。近体詩は、句数・字数・押韻・平仄（音の高低）のきまりが厳しい詩です。</p>
+<h2>押韻</h2>
+<p>句の終わりに、同じ響きの字をそろえます（<a href="./?w=%E6%8A%BC%E9%9F%BB">押韻</a>）。</p>
+<ul><li><b>五言詩</b>は偶数句の末</li><li><b>七言詩</b>は第一句の末と、偶数句の末</li></ul>
+<div class="ex"><p class="ex-l"><b>白文</b><span>国破山河在、城春草木深。</span></p><p class="ex-l"><b>書き下し</b><span>国破れて山河在り、城春にして草木深し。</span></p><p class="ex-l ex-t"><b>訳</b><span>国は滅びても山河は残り、城跡の春に草木が茂る。</span></p></div>
+<p><a href="./?w=%E6%9D%9C%E7%94%AB">杜甫</a>の「春望」は五言律詩なので、偶数句末の「深・心・金・簪」が韻を踏みます。<b>空欄補充で押韻が問われたら、同じ響きの字を選ぶ。</b></p>
+<h2>対句</h2>
+<p>二つの句で、語の働きと組み立てをそろえて並べることを<a href="./?w=%E5%AF%BE%E5%8F%A5">対句</a>といいます。律詩では、第三・四句（頷聯）と第五・六句（頸聯）を必ず対句にします。</p>
+<div class="ex"><p class="ex-l"><b>白文</b><span>感<span class="kt">レ</span>時花濺<span class="kt">レ</span>涙、恨<span class="kt">レ</span>別鳥驚<span class="kt">レ</span>心。</span></p><p class="ex-l"><b>書き下し</b><span>時に感じては花にも涙を濺ぎ、別れを恨みては鳥にも心を驚かす。</span></p><p class="ex-l ex-t"><b>訳</b><span>時世を思えば花にも涙し、別れを悲しめば鳥にも心が騒ぐ。</span></p></div>
+<p>「感時」と「恨別」、「花」と「鳥」、「濺涙」と「驚心」が向き合っています。<b>対句の片方が分からなければ、もう片方から推せる。</b> 設問を解く強い手がかりです。</p>
+<h2>絶句の組み立て</h2>
+<p><a href="./?w=%E7%B5%B6%E5%8F%A5">絶句</a>の四句は<a href="./?w=%E8%B5%B7%E6%89%BF%E8%BB%A2%E7%B5%90">起承転結</a>で組み立てます。</p>
+<table><thead><tr><th>句</th><th>役割</th></tr></thead><tbody><tr><td>起句</td><td>歌い起こす</td></tr><tr><td>承句</td><td>受けて広げる</td></tr><tr><td>転句</td><td>場面や視点を転じる</td></tr><tr><td>結句</td><td>まとめて思いを示す</td></tr></tbody></table>
+<p><b>主題は転句と結句に出ます。</b> 前半が景色、後半が心情、という形がもっとも多い型です。</p>
+<h2>押さえておく詩人</h2>
+<table><thead><tr><th>詩人</th><th>呼び名</th><th>詠んだもの</th></tr></thead><tbody><tr><td><a href="./?w=%E9%99%B6%E6%B7%B5%E6%98%8E">陶淵明</a></td><td>田園詩人</td><td>田園の暮らし・隠逸</td></tr><tr><td><a href="./?w=%E6%9D%8E%E7%99%BD">李白</a></td><td>詩仙</td><td>酒・月・自在な想像</td></tr><tr><td><a href="./?w=%E6%9D%9C%E7%94%AB">杜甫</a></td><td>詩聖</td><td>戦乱・民の苦しみ・望郷</td></tr><tr><td><a href="./?w=%E7%8E%8B%E7%B6%AD%E3%83%BB%E5%AD%9F%E6%B5%A9%E7%84%B6">王維・孟浩然</a></td><td>詩仏（王維）</td><td>自然・静けさ・送別</td></tr><tr><td><a href="./?w=%E7%99%BD%E5%B1%85%E6%98%93">白居易</a></td><td>楽天</td><td>平易な言葉・社会・長恨歌</td></tr></tbody></table>
+<p><a href="./?w=%E7%99%BD%E5%B1%85%E6%98%93">白居易</a>の詩文集『白氏文集』は、平安時代の日本で広く読まれ、『枕草子』や『源氏物語』にも引かれています。</p>
+<h2>読むときの手順</h2>
+<ul><li>句数と字数を数えて、形式を決める</li><li>韻字に印をつける（空欄補充の候補が絞れる）</li><li>対句を見つけて、分かる側から分からない側を推す</li><li>転句で何が変わったかを確かめ、結句の心情をつかむ</li><li>作者が左遷中か、旅の途中か、戦乱の中か、を題と注から読む</li></ul>
+<a class="backtop" href="#top">↑ 目次へ</a></section>
+<section class="chap" id="kojiseigo"><h2>故事成語 — どの本から来たか</h2>
+<p>故事成語は、<b>出典の書物ごと</b>に覚えると、話の性格までまとめて頭に入ります。戦国策の話は策略、韓非子の話は皮肉、孟子の話は王への説得、と色がはっきりしているからです。</p>
+<h2>戦国策 — 遊説家のたとえ話</h2>
+<p><a href="./?w=%E6%88%A6%E5%9B%BD%E7%AD%96">戦国策</a>は、戦国時代の遊説家が君主を説得するときに使ったたとえ話の宝庫です。</p>
+<table><thead><tr><th>成語</th><th>話の中身</th></tr></thead><tbody><tr><td><a href="./?w=%E6%BC%81%E5%A4%AB%E3%81%AE%E5%88%A9">漁夫の利</a></td><td>シギとハマグリが争い、漁師が両方を取る</td></tr><tr><td><a href="./?w=%E8%9B%87%E8%B6%B3">蛇足</a></td><td>蛇の絵に足を描き足して、酒を飲みそこねる</td></tr><tr><td><a href="./?w=%E8%99%8E%E3%81%AE%E5%A8%81%E3%82%92%E5%80%9F%E3%82%8B%E7%8B%90">虎の威を借る狐</a></td><td>狐が虎を連れて歩き、獣たちを恐れさせる</td></tr></tbody></table>
+<p>どれも<b>「争えば第三者が得をする」「余計なことをするな」</b>と、相手国の君主に行動を思いとどまらせる話です。</p>
+<h2>韓非子 — 愚か者を笑う</h2>
+<p><a href="./?w=%E6%B3%95%E5%AE%B6">法家</a>の韓非子は、古いやり方に固執する人を皮肉る話を多く残しました。</p>
+<table><thead><tr><th>成語</th><th>話の中身</th></tr></thead><tbody><tr><td><a href="./?w=%E7%9F%9B%E7%9B%BE">矛盾</a></td><td>最強の矛と最強の盾を同時に売ろうとする</td></tr><tr><td><a href="./?w=%E5%AE%88%E6%A0%AA">守株</a></td><td>切り株にぶつかったウサギを待ち続ける</td></tr></tbody></table>
+<div class="ex"><p class="ex-l"><b>白文</b><span>以<span class="kt">二</span>子之矛<span class="kt">一</span>陥<span class="kt">二</span>子之盾<span class="kt">一</span>、何如。</span></p><p class="ex-l"><b>書き下し</b><span>子の矛を以て子の盾を陥さば、何如。</span></p><p class="ex-l ex-t"><b>訳</b><span>あなたの矛であなたの盾を突いたらどうなるのか。</span></p></div>
+<p><b>「守株」は、昔の王の政治をそのまま今に使おうとする儒家への批判</b>として語られています。</p>
+<h2>孟子 — 王を説く</h2>
+<table><thead><tr><th>成語</th><th>話の中身</th></tr></thead><tbody><tr><td><a href="./?w=%E4%BA%94%E5%8D%81%E6%AD%A9%E7%99%BE%E6%AD%A9">五十歩百歩</a></td><td>五十歩逃げた兵が、百歩逃げた兵を笑う</td></tr><tr><td><a href="./?w=%E5%8A%A9%E9%95%B7">助長</a></td><td>苗を早く伸ばそうと引っぱり、枯らしてしまう</td></tr></tbody></table>
+<p>「五十歩百歩」は、少しばかり民に配慮しただけで得意になっている王に、「根本は変わらない」と伝える話です。</p>
+<h2>史記 — 英雄たちの場面</h2>
+<p><a href="./?w=%E5%8F%B2%E8%A8%98">史記</a>からは、人物の生き方そのものが成語になりました。</p>
+<table><thead><tr><th>成語</th><th>場面</th></tr></thead><tbody><tr><td><a href="./?w=%E5%9B%9B%E9%9D%A2%E6%A5%9A%E6%AD%8C">四面楚歌</a></td><td>項羽が包囲され、四方から楚の歌を聞く</td></tr><tr><td><a href="./?w=%E8%83%8C%E6%B0%B4%E3%81%AE%E9%99%A3">背水の陣</a></td><td>韓信が川を背に陣を敷き、兵に死力を尽くさせる</td></tr><tr><td><a href="./?w=%E5%AE%8C%E7%92%A7">完璧</a></td><td>藺相如が璧を無事に持ち帰る</td></tr><tr><td><a href="./?w=%E5%88%8E%E9%A0%B8%E3%81%AE%E4%BA%A4%E3%82%8F%E3%82%8A">刎頸の交わり</a></td><td>廉頗と藺相如が、首をかけた友情を結ぶ</td></tr><tr><td><a href="./?w=%E9%B6%8F%E5%8F%A3%E7%89%9B%E5%BE%8C">鶏口牛後</a></td><td>蘇秦が、小国でも長でいよと説く</td></tr><tr><td><a href="./?w=%E7%8B%A1%E5%85%94%E6%AD%BB%E8%89%AF%E7%8B%97%E7%83%B9">狡兔死良狗烹</a></td><td>功臣は用が済めば捨てられる</td></tr></tbody></table>
+<h2>論語・荀子・詩経 — 学ぶことの言葉</h2>
+<table><thead><tr><th>成語</th><th>出典</th></tr></thead><tbody><tr><td><a href="./?w=%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0">温故知新</a></td><td>論語・為政</td></tr><tr><td><a href="./?w=%E4%BB%96%E5%B1%B1%E3%81%AE%E7%9F%B3">他山の石</a></td><td>詩経・小雅</td></tr><tr><td>青は藍より出でて藍より青し</td><td>荀子・勧学</td></tr></tbody></table>
+<h2>そのほか</h2>
+<table><thead><tr><th>成語</th><th>出典</th></tr></thead><tbody><tr><td><a href="./?w=%E8%87%A5%E8%96%AA%E5%98%97%E8%83%86">臥薪嘗胆</a></td><td>十八史略（呉と越の争い）</td></tr><tr><td><a href="./?w=%E5%91%89%E8%B6%8A%E5%90%8C%E8%88%9F">呉越同舟</a></td><td>孫子</td></tr><tr><td><a href="./?w=%E5%A1%9E%E7%BF%81%E3%81%8C%E9%A6%AC">塞翁が馬</a></td><td>淮南子</td></tr><tr><td><a href="./?w=%E6%9D%9E%E6%86%82">杞憂</a></td><td>列子</td></tr><tr><td><a href="./?w=%E6%9C%9D%E4%B8%89%E6%9A%AE%E5%9B%9B">朝三暮四</a></td><td>荘子・列子</td></tr><tr><td><a href="./?w=%E6%8E%A8%E6%95%B2">推敲</a></td><td>唐詩紀事（賈島と韓愈）</td></tr><tr><td><a href="./?w=%E7%99%BD%E7%9C%89">白眉</a></td><td>三国志</td></tr><tr><td><a href="./?w=%E7%A0%B4%E7%AB%B9%E3%81%AE%E5%8B%A2%E3%81%84">破竹の勢い</a></td><td>晋書</td></tr><tr><td><a href="./?w=%E8%A6%86%E6%B0%B4%E7%9B%86%E3%81%AB%E8%BF%94%E3%82%89%E3%81%9A">覆水盆に返らず</a></td><td>拾遺記</td></tr><tr><td><a href="./?w=%E7%99%BB%E7%AB%9C%E9%96%80">登竜門</a></td><td>後漢書</td></tr><tr><td><a href="./?w=%E5%A2%A8%E5%AE%88">墨守</a></td><td>墨子</td></tr></tbody></table>
+<a class="backtop" href="#top">↑ 目次へ</a></section>
+<section class="chap" id="yomu"><h2>漢文の読み方 — 話の型と設問の急所</h2>
+<p>共通テストの漢文は、<b>話の型</b>を早くつかんだ人が有利です。登場人物が何をしようとしている文章なのかが分かれば、細かい句形も文脈から確かめられます。</p>
+<h2>よく出る三つの型</h2>
+<table><thead><tr><th>型</th><th>見分け方</th><th>読むときの的</th></tr></thead><tbody><tr><td>問答</td><td>「曰」が交互に出る</td><td>誰が問い、誰が答えたか。答えの結論</td></tr><tr><td>寓話・たとえ</td><td>動物・農夫・商人が出る</td><td>たとえが何を指しているか</td></tr><tr><td>史伝・逸話</td><td>人名と官職が出る</td><td>その人物の評価（ほめているか、けなしているか）</td></tr></tbody></table>
+<h3>問答</h3>
+<p>「<a href="./?w=%E6%9B%B0">曰</a>」の主語を、出てくるたびに確かめます。「対曰」は目下が目上に答える形なので、それだけで上下関係が分かります（<a href="./?w=%E5%AF%BE">対</a>）。</p>
+<div class="ex"><p class="ex-l"><b>白文</b><span>子曰、学而時習<span class="kt">レ</span>之。</span></p><p class="ex-l"><b>書き下し</b><span>子曰はく、学びて時に之を習ふ、と。</span></p><p class="ex-l ex-t"><b>訳</b><span>先生は言われた、学んで折にふれ復習する、と。</span></p></div>
+<p><b>会話の終わりは「と」で閉じる。</b> 白文に「と」は書かれていないので、どこまでが会話かを自分で決める必要があります。</p>
+<h3>寓話</h3>
+<p>たとえ話の後に、必ず「これと同じだ」と本題が来ます。<b>たとえの部分ではなく、本題の部分に答えがある</b>と考えて読みます。</p>
+<h3>史伝</h3>
+<p>人物の評価は、最後の一文にまとめられることが多いです。「君子」「賢」「忠」などの語でほめ、「小人」「愚」などの語でけなします。</p>
+<h2>設問の急所</h2>
+<h3>傍線部の解釈</h3>
+<p><b>句形を一つ見つけたら、それだけで選択肢が半分に減ります。</b> 反語なら「〜ない」と否定で終わる訳、使役なら「〜させる」、受身なら「〜される」を含む訳が残ります。</p>
+<h3>書き下し文と返り点</h3>
+<p>選択肢の違いは、たいてい<b>一か所</b>です。再読文字の読み方、「不」の活用、置き字の扱いを先に確かめます。<a href="./?w=%E8%BF%94%E8%AA%AD%E6%96%87%E5%AD%97">返読文字</a>があればそこに返り点が付くはずだ、というところから逆算するのも有効です。</p>
+<h3>理由説明</h3>
+<p>「<a href="./?w=%E6%89%80%E4%BB%A5">所以</a>」「<a href="./?w=%E6%95%85">故</a>」「<a href="./?w=%E6%98%AF%E4%BB%A5">是以</a>」の前後に理由があります。「何則（なんとなれば）」が出たら、その後が理由です（<a href="./?w=%E4%BD%95%E5%89%87">何則</a>）。</p>
+<h3>複数の文章</h3>
+<p>共通テストでは、二つの文章や、文章と詩を比べる設問が出ます。<b>同じ話題について、立場の違う二人が何を言っているか</b>を表にして読むと、選択肢の正誤が決めやすくなります。</p>
+<h2>最後に確かめること</h2>
+<ul><li>主語が変わるところに印をつけたか</li><li>会話の始まり（曰）と終わり（と）を決めたか</li><li>句形を見つけて、訳の形を決めたか</li><li>筆者（または登場人物）の評価の向きをつかんだか</li></ul>
+<a class="backtop" href="#top">↑ 目次へ</a></section>
+  <footer style="text-align:center;font-size:.8rem;color:var(--ink-soft);margin-top:40px;line-height:1.9">渡邊梢太の漢文 背景知識 — 本文はすべて独自に作成しています。<br>引用した詩文は『論語』『孟子』『史記』『唐詩選』など、著作権の切れた古典によります。</footer>
+</div></div>
+</body>
+</html>

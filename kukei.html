@@ -568,7 +568,7 @@ nav.sister a[aria-current]{ background:var(--ai); border-color:var(--ai); color:
     <div class="rod" style="margin-top:16px"><span class="knob"></span><span class="knob"></span></div>
   </header>
 
-  <nav class="sister" aria-label="道場の切り替え"><a href="./">漢文辞典</a><a href="kukei.html" aria-current="page">句形道場</a><a href="haikei.html">背景知識</a></nav>
+  <nav class="sister" aria-label="道場の切り替え"><a href="https://upopotennis-gif.github.io/kokugo-dojo/">国語道場トップ</a><a href="./">漢文辞典</a><a href="kukei.html" aria-current="page">句形道場</a><a href="haikei.html">背景知識</a></nav>
 
   <div id="error-banner" hidden>
     <span id="error-text"></span>
@@ -1042,6 +1042,7 @@ nav.sister a[aria-current]{ background:var(--ai); border-color:var(--ai); color:
     results[currentIndex] = isCorrect ? "correct" : "wrong";
     recordAnswer(q.id, isCorrect);
     saveStore();
+    if(window.Tsukumo) Tsukumo.answer(isCorrect);   // 付喪神（道場共通/tsukumo）
     updateDots();
     els.quizScore.textContent = "正解 " + score;
 
@@ -1091,6 +1092,7 @@ nav.sister a[aria-current]{ background:var(--ai); border-color:var(--ai); color:
     else msg = CONFIG.lowScoreMessage;
     els.resultMessage.textContent = msg;
 
+    if(window.Tsukumo) Tsukumo.finish(total, score);
     if(selectedUnit && !isWrongReview){
       recordQuizFinished(selectedUnit.id, total, score);
     } else {
@@ -1286,5 +1288,6 @@ nav.sister a[aria-current]{ background:var(--ai); border-color:var(--ai); color:
   els.btnViewGuide.addEventListener("click", function(){ showGuide(); });
 })();
 </script>
+<script src="tsukumo.js" data-subject="kanbun"></script>
 </body>
 </html>

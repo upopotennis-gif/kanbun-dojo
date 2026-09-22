@@ -439,6 +439,7 @@ body{background-image:linear-gradient(90deg,var(--kaisen) 1px,transparent 1px);b
   </header>
 
   <nav class="sister" aria-label="道場の切り替え">
+    <a href="https://upopotennis-gif.github.io/kokugo-dojo/">国語道場トップ</a>
     <a href="./" aria-current="page">漢文辞典</a>
     <a href="kukei.html">句形道場</a>
     <a href="haikei.html">背景知識</a>
@@ -1139,6 +1140,7 @@ function renderQuiz(){
   }
   if(quiz.i>=quiz.qs.length){
     var n=quiz.qs.length;
+    if(!quiz.tk){ quiz.tk=1; if(window.Tsukumo) Tsukumo.finish(n,quiz.score); }   /* 結果は描き直されることがあるので1回だけ */
     quizEl.innerHTML='<div class="result">'+
       '<div class="q-label">結果</div>'+
       '<div class="score">'+quiz.score+'<small> / '+n+'</small></div>'+
@@ -1175,6 +1177,7 @@ function renderQuiz(){
   document.getElementById("opts").addEventListener("click",function(ev){
     var b=ev.target.closest(".opt"); if(!b||q.chosen!=null) return;
     q.chosen=Number(b.dataset.id);
+    if(window.Tsukumo) Tsukumo.answer(q.chosen===d.id);   /* 付喪神（道場共通/tsukumo） */
     var r=rec(d.id);
     if(q.chosen===d.id){ quiz.score++; r.ok++; schedule(r,(r.box||0)+1); if(r.lv<3) r.lv=r.lv===2?3:2; }
     /* 誤答しても「覚えた」から一気に「まだ」へは落とさない。一段だけ下げる */
@@ -1583,5 +1586,6 @@ if(jumpWord){
   }
 }
 </script>
+<script src="tsukumo.js" data-subject="kanbun"></script>
 </body>
 </html>
